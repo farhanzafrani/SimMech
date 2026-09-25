@@ -3,10 +3,6 @@
 from . import stress_strain
 from . import catalog
 from . import four_bar_linkage
-<<<<<<< Updated upstream
-
-__all__ = ['stress_strain', 'catalog', 'four_bar_linkage']
-=======
 from . import torsion
 from . import axial_loading
 from . import shear_bending
@@ -39,4 +35,3 @@ __all__ = [
     'bolted_joints',
     'bearing_selection',
 ]
->>>>>>> Stashed changes

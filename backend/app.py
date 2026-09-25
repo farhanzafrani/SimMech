@@ -11,8 +11,6 @@ from fastapi.responses import JSONResponse
 from config import settings
 from routers import stress_strain, catalog
 from routers import four_bar_linkage
-<<<<<<< Updated upstream
-=======
 from routers import torsion
 from routers import axial_loading
 from routers import shear_bending
@@ -26,7 +24,6 @@ from routers import shaft_design
 from routers import spring_design
 from routers import bolted_joints
 from routers import bearing_selection
->>>>>>> Stashed changes
 
 
 @asynccontextmanager
@@ -98,8 +95,6 @@ async def health():
 
 app.include_router(stress_strain.router)
 app.include_router(four_bar_linkage.router)
-<<<<<<< Updated upstream
-=======
 app.include_router(torsion.router)
 app.include_router(axial_loading.router)
 app.include_router(shear_bending.router)
@@ -113,7 +108,6 @@ app.include_router(shaft_design.router)
 app.include_router(spring_design.router)
 app.include_router(bolted_joints.router)
 app.include_router(bearing_selection.router)
->>>>>>> Stashed changes
 app.include_router(catalog.router)
 
 
