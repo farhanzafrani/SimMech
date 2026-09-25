@@ -1,0 +1,211 @@
+- generic [ref=f5e3]:
+  - banner [ref=f5e4]:
+    - link "SimMec" [ref=f5e5] [cursor=pointer]:
+      - /url: /courses
+    - navigation [ref=f5e11]:
+      - link "Courses" [ref=f5e12] [cursor=pointer]:
+        - /url: /courses
+    - searchbox "Search topics and formulas" [ref=f5e13]
+  - generic [ref=f5e14]:
+    - navigation [ref=f5e15]:
+      - link "← COURSE Design and Manufacturing" [ref=f5e16] [cursor=pointer]:
+        - /url: /courses/design-and-manufacturing
+        - generic [ref=f5e17]: ← COURSE
+        - generic [ref=f5e18]: Design and Manufacturing
+      - generic [ref=f5e20]:
+        - generic [ref=f5e21]:
+          - generic [ref=f5e22]: "01"
+          - generic [ref=f5e23]: 4-Bar Linkage Kinematics
+        - generic [ref=f5e24]:
+          - link "Formulas" [ref=f5e25] [cursor=pointer]:
+            - /url: "#formulas"
+          - link "Visualization" [ref=f5e26] [cursor=pointer]:
+            - /url: "#visualize"
+          - link "Playground" [ref=f5e27] [cursor=pointer]:
+            - /url: "#playground"
+          - link "Practice" [ref=f5e28] [cursor=pointer]:
+            - /url: "#practice"
+    - main [ref=f5e29]:
+      - generic [ref=f5e30]:
+        - navigation "Breadcrumb" [ref=f5e31]:
+          - link "Courses" [ref=f5e32] [cursor=pointer]:
+            - /url: /courses
+          - generic [ref=f5e33]: /
+          - link "Design and Manufacturing" [ref=f5e34] [cursor=pointer]:
+            - /url: /courses/design-and-manufacturing
+          - generic [ref=f5e35]: /
+          - generic [ref=f5e36]: 4-Bar Linkage Kinematics
+        - heading "4-Bar Linkage Kinematics" [level=1] [ref=f5e37]
+        - generic [ref=f5e38]: Simulate a four-bar mechanism and see how link lengths shape its motion.
+        - paragraph [ref=f5e39]: "Four rigid links, four pin joints, one fixed to the ground — the four-bar linkage is the simplest mechanism that turns rotation into complex, useful motion. Change the link lengths and the whole character of the motion changes: cranks that spin fully, rockers that only oscillate, and points where the mechanism jams."
+        - generic [ref=f5e40]:
+          - link "1 · Formulas" [ref=f5e41] [cursor=pointer]:
+            - /url: "#formulas"
+          - link "2 · Visualization" [ref=f5e42] [cursor=pointer]:
+            - /url: "#visualize"
+          - link "3 · Playground" [ref=f5e43] [cursor=pointer]:
+            - /url: "#playground"
+      - generic [ref=f5e44]:
+        - generic [ref=f5e45]:
+          - generic [ref=f5e46]: "01"
+          - heading "Formulas" [level=2] [ref=f5e47]
+        - generic [ref=f5e48]:
+          - generic [ref=f5e49]:
+            - generic [ref=f5e50]: Grashof condition
+            - generic [ref=f5e53]:
+              - math [ref=f5e55]:
+                - generic [ref=f5e57]:
+                  - generic [ref=f5e58]: s
+                  - generic [ref=f5e59]: +
+                  - generic [ref=f5e60]: l
+                  - generic [ref=f5e61]: ≤
+                  - generic [ref=f5e62]: p
+                  - generic [ref=f5e63]: +
+                  - generic [ref=f5e64]: q
+              - generic [aria-hidden] [ref=f5e65]:
+                - generic [ref=f5e66]: s +
+                - generic [ref=f5e67]: l ≤
+                - generic [ref=f5e68]: p +
+                - generic [ref=f5e69]: q
+            - generic [ref=f5e70]: s = shortest link, l = longest, p and q = the other two. If true, the shortest link can fully rotate relative to its neighbors.
+          - generic [ref=f5e71]:
+            - generic [ref=f5e72]: Transmission angle
+            - generic [ref=f5e75]:
+              - math [ref=f5e77]:
+                - generic [ref=f5e79]:
+                  - generic [ref=f5e80]: μ
+                  - generic [ref=f5e81]: =
+                  - generic [ref=f5e82]: ∠
+                  - generic [ref=f5e83]: (
+                  - generic [ref=f5e84]: coupler
+                  - generic [ref=f5e85]: ","
+                  - generic [ref=f5e86]: rocker
+                  - generic [ref=f5e87]: )
+              - generic [aria-hidden] [ref=f5e88]:
+                - generic [ref=f5e89]: μ =
+                - generic [ref=f5e90]:
+                  - text: ∠(
+                  - generic [ref=f5e91]: coupler
+                  - text: ","
+                  - generic [ref=f5e93]: rocker
+                  - text: )
+            - generic [ref=f5e94]: Angle between the coupler and the rocker, measured at the joint connecting them. Force transmits best near μ = 90°.
+          - generic [ref=f5e95]:
+            - generic [ref=f5e96]: Mechanical advantage
+            - generic [ref=f5e99]:
+              - math [ref=f5e101]:
+                - generic [ref=f5e103]:
+                  - generic [ref=f5e104]: M
+                  - generic [ref=f5e105]: A
+                  - generic [ref=f5e106]: =
+                  - generic [ref=f5e107]:
+                    - generic [ref=f5e108]:
+                      - generic [ref=f5e109]: τ
+                      - generic [ref=f5e110]:
+                        - generic [ref=f5e111]: o
+                        - generic [ref=f5e112]: u
+                        - generic [ref=f5e113]: t
+                    - generic [ref=f5e114]:
+                      - generic [ref=f5e115]: τ
+                      - generic [ref=f5e116]:
+                        - generic [ref=f5e117]: i
+                        - generic [ref=f5e118]: "n"
+                  - generic [ref=f5e119]: =
+                  - generic [ref=f5e120]:
+                    - generic [ref=f5e121]:
+                      - generic [ref=f5e122]: ω
+                      - generic [ref=f5e123]:
+                        - generic [ref=f5e124]: i
+                        - generic [ref=f5e125]: "n"
+                    - generic [ref=f5e126]:
+                      - generic [ref=f5e127]: ω
+                      - generic [ref=f5e128]:
+                        - generic [ref=f5e129]: o
+                        - generic [ref=f5e130]: u
+                        - generic [ref=f5e131]: t
+              - generic [aria-hidden] [ref=f5e132]:
+                - generic [ref=f5e133]: MA =
+                - generic [ref=f5e134]:
+                  - generic [ref=f5e139]:
+                    - generic [ref=f5e142]:
+                      - text: τ
+                      - generic [ref=f5e143]: in
+                    - generic [ref=f5e155]:
+                      - text: τ
+                      - generic [ref=f5e156]: out
+                  - text: =
+                - generic [ref=f5e173]:
+                  - generic [ref=f5e176]:
+                    - text: ω
+                    - generic [ref=f5e177]: out
+                  - generic [ref=f5e189]:
+                    - text: ω
+                    - generic [ref=f5e190]: in
+            - generic [ref=f5e202]: From power balance (T·ω = const, no friction). MA is largest near μ = 90° and collapses toward μ = 0° or 180°.
+      - generic [ref=f5e203]:
+        - generic [ref=f5e204]:
+          - generic [ref=f5e205]: "02"
+          - heading "Visualization" [level=2] [ref=f5e206]
+        - generic [ref=f5e207]:
+          - figure "Annotated diagram of the setup this topic models." [ref=f5e208]:
+            - img "Four-bar linkage schematic" [ref=f5e209]:
+              - generic [ref=f5e221]: Crank
+              - generic [ref=f5e223]: Coupler
+              - generic [ref=f5e225]: Rocker
+              - generic [ref=f5e226]: Ground link (fixed)
+          - figure "A worked-through animation of the same concept in motion." [ref=f5e232]
+      - generic [ref=f5e236]:
+        - generic [ref=f5e237]:
+          - generic [ref=f5e238]:
+            - generic [ref=f5e239]: "03"
+            - heading "Playground" [level=2] [ref=f5e240]
+          - generic [ref=f5e241]: Move the sliders — every diagram and number updates live.
+        - generic [ref=f5e243]:
+          - generic [ref=f5e244]:
+            - heading "4-Bar Linkage Kinematics" [level=1] [ref=f5e245]
+            - paragraph [ref=f5e246]: Explore how mechanism link lengths and input angle affect output motion and efficiency
+          - generic [ref=f5e247]:
+            - generic [ref=f5e248]:
+              - generic [ref=f5e249]:
+                - heading "Link Dimensions" [level=3] [ref=f5e250]
+                - button "Edit Dimensions" [ref=f5e251] [cursor=pointer]
+                - generic [ref=f5e252]:
+                  - generic [ref=f5e253]:
+                    - generic [ref=f5e254]: L1 (Ground)
+                    - generic [ref=f5e255]: "4.00"
+                  - generic [ref=f5e256]:
+                    - generic [ref=f5e257]: L2 (Crank)
+                    - generic [ref=f5e258]: "1.00"
+                  - generic [ref=f5e259]:
+                    - generic [ref=f5e260]: L3 (Coupler)
+                    - generic [ref=f5e261]: "4.50"
+                  - generic [ref=f5e262]:
+                    - generic [ref=f5e263]: L4 (Follower)
+                    - generic [ref=f5e264]: "3.50"
+              - generic [ref=f5e265]:
+                - generic [ref=f5e267]:
+                  - generic [ref=f5e268]: Input Crank Angle
+                  - generic [ref=f5e269]: 0.0°
+                - slider [disabled] [ref=f5e270]: "0"
+              - generic [ref=f5e271]:
+                - heading "Performance" [level=3] [ref=f5e272]
+                - generic [ref=f5e273]: Computing...
+            - heading "Mechanism Animation" [level=3] [ref=f5e277]
+      - generic [ref=f5e278]:
+        - generic [ref=f5e279]:
+          - generic [ref=f5e280]: "04"
+          - heading "Practice with the playground" [level=2] [ref=f5e281]
+        - generic [ref=f5e282]:
+          - generic [ref=f5e283]:
+            - generic [ref=f5e284]: CHALLENGE 1
+            - generic [ref=f5e285]: Adjust the link lengths until the Grashof condition fails. What happens to the crank’s ability to fully rotate?
+          - generic [ref=f5e286]:
+            - generic [ref=f5e287]: CHALLENGE 2
+            - generic [ref=f5e288]: Find the input angle where the transmission angle is worst. What does the mechanism’s motion look like there?
+          - generic [ref=f5e289]:
+            - generic [ref=f5e290]: CHALLENGE 3
+            - generic [ref=f5e291]: Increase the coupler length only. How does the output rocker’s swing angle change?
+      - generic [ref=f5e292]:
+        - generic [ref=f5e293]: GO DEEPER
+        - 'link "MIT OCW — 2.007 Design and Manufacturing I: Mechanisms lecture ↗" [ref=f5e295] [cursor=pointer]':
+          - /url: https://ocw.mit.edu/courses/2-007-design-and-manufacturing-i-spring-2009/pages/lecture-notes/

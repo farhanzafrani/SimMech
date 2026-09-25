@@ -18,6 +18,12 @@ from routers import bending_stress
 from routers import beam_deflection
 from routers import mohrs_circle
 from routers import buckling
+from routers import failure_theories
+from routers import fatigue_analysis
+from routers import shaft_design
+from routers import spring_design
+from routers import bolted_joints
+from routers import bearing_selection
 
 
 @asynccontextmanager
@@ -96,6 +102,12 @@ app.include_router(bending_stress.router)
 app.include_router(beam_deflection.router)
 app.include_router(mohrs_circle.router)
 app.include_router(buckling.router)
+app.include_router(failure_theories.router)
+app.include_router(fatigue_analysis.router)
+app.include_router(shaft_design.router)
+app.include_router(spring_design.router)
+app.include_router(bolted_joints.router)
+app.include_router(bearing_selection.router)
 app.include_router(catalog.router)
 
 

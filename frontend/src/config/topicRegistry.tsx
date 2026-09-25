@@ -8,6 +8,12 @@ import BendingStressConcept from '../components/concepts/BendingStressConcept'
 import BeamDeflectionConcept from '../components/concepts/BeamDeflectionConcept'
 import MohrsCircleConcept from '../components/concepts/MohrsCircleConcept'
 import BucklingConcept from '../components/concepts/BucklingConcept'
+import FailureTheoriesConcept from '../components/concepts/FailureTheoriesConcept'
+import FatigueAnalysisConcept from '../components/concepts/FatigueAnalysisConcept'
+import ShaftDesignConcept from '../components/concepts/ShaftDesignConcept'
+import SpringDesignConcept from '../components/concepts/SpringDesignConcept'
+import BoltedJointsConcept from '../components/concepts/BoltedJointsConcept'
+import BearingSelectionConcept from '../components/concepts/BearingSelectionConcept'
 import StressStrainAnalysis from '../components/StressStrainAnalysis'
 import FourBarLinkage from '../components/FourBarLinkage'
 import TorsionAnalysis from '../components/TorsionAnalysis'
@@ -17,6 +23,12 @@ import BendingStressAnalysis from '../components/BendingStressAnalysis'
 import BeamDeflectionAnalysis from '../components/BeamDeflectionAnalysis'
 import MohrsCircleAnalysis from '../components/MohrsCircleAnalysis'
 import BucklingAnalysis from '../components/BucklingAnalysis'
+import FailureTheoriesAnalysis from '../components/FailureTheoriesAnalysis'
+import FatigueAnalysis from '../components/FatigueAnalysis'
+import ShaftDesignAnalysis from '../components/ShaftDesignAnalysis'
+import SpringDesignAnalysis from '../components/SpringDesignAnalysis'
+import BoltedJointsAnalysis from '../components/BoltedJointsAnalysis'
+import BearingSelectionAnalysis from '../components/BearingSelectionAnalysis'
 
 interface TopicImplementation {
   Concept: ComponentType
@@ -59,5 +71,29 @@ export const TOPIC_REGISTRY: Record<string, TopicImplementation> = {
   'columns-buckling': {
     Concept: BucklingConcept,
     Playground: BucklingAnalysis,
+  },
+  'failure-theories': {
+    Concept: FailureTheoriesConcept,
+    Playground: FailureTheoriesAnalysis,
+  },
+  'fatigue-analysis': {
+    Concept: FatigueAnalysisConcept,
+    Playground: FatigueAnalysis,
+  },
+  'shaft-design': {
+    Concept: ShaftDesignConcept,
+    Playground: ShaftDesignAnalysis,
+  },
+  'spring-design': {
+    Concept: SpringDesignConcept,
+    Playground: SpringDesignAnalysis,
+  },
+  'bolted-joints': {
+    Concept: BoltedJointsConcept,
+    Playground: BoltedJointsAnalysis,
+  },
+  'bearing-selection': {
+    Concept: BearingSelectionConcept,
+    Playground: BearingSelectionAnalysis,
   },
 }
