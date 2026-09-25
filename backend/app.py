@@ -11,6 +11,13 @@ from fastapi.responses import JSONResponse
 from config import settings
 from routers import stress_strain, catalog
 from routers import four_bar_linkage
+from routers import torsion
+from routers import axial_loading
+from routers import shear_bending
+from routers import bending_stress
+from routers import beam_deflection
+from routers import mohrs_circle
+from routers import buckling
 
 
 @asynccontextmanager
@@ -82,6 +89,13 @@ async def health():
 
 app.include_router(stress_strain.router)
 app.include_router(four_bar_linkage.router)
+app.include_router(torsion.router)
+app.include_router(axial_loading.router)
+app.include_router(shear_bending.router)
+app.include_router(bending_stress.router)
+app.include_router(beam_deflection.router)
+app.include_router(mohrs_circle.router)
+app.include_router(buckling.router)
 app.include_router(catalog.router)
 
 
