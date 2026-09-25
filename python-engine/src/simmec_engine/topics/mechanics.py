@@ -336,6 +336,89 @@ def compute_von_mises_stress(
     return float(sigma_vm)
 
 
+def compute_torsion(
+    torque: float,
+    diameter: float,
+    length: float,
+    youngs_modulus: float,
+    poisson_ratio: float,
+    yield_stress: float,
+    num_points: int = 50,
+) -> Dict:
+    """
+    Compute shear stress distribution and angle of twist for a solid
+    circular shaft in torsion.
+
+    Args:
+        torque: Applied torque T in N·m
+        diameter: Shaft diameter d in mm
+        length: Shaft length L in m
+        youngs_modulus: Young's modulus E in MPa (used to derive shear modulus)
+        poisson_ratio: Poisson's ratio ν (used to derive shear modulus)
+        yield_stress: Tensile yield stress σ_y in MPa (Tresca: τ_yield = σ_y / 2)
+        num_points: Number of points along the radial stress distribution
+
+    Returns:
+        Dictionary with max shear stress, angle of twist, safety factor,
+        and the radial shear-stress distribution τ(r) = T r / J.
+    """
+
+    if diameter <= 0:
+        raise ValueError("Diameter must be positive")
+    if length <= 0:
+        raise ValueError("Length must be positive")
+    if youngs_modulus <= 0:
+        raise ValueError("Young's modulus must be positive")
+
+    # Shear modulus from the isotropic elasticity relation G = E / (2(1+ν))
+    shear_modulus = youngs_modulus / (2 * (1 + poisson_ratio))  # MPa
+
+    d_m = diameter / 1000.0  # mm -> m
+    radius_m = d_m / 2
+
+    # Polar moment of inertia for a solid circular shaft: J = π d⁴ / 32
+    polar_moment = np.pi * d_m**4 / 32  # m^4
+
+    # τ(r) = T r / J, in Pa -> convert to MPa
+    max_shear_stress = (torque * radius_m / polar_moment) / 1e6  # MPa
+
+    # θ = T L / (G J); G must be in Pa (N/m²) to match T [N·m] and J [m^4]
+    shear_modulus_pa = shear_modulus * 1e6
+    angle_of_twist_rad = torque * length / (shear_modulus_pa * polar_moment)
+    angle_of_twist_deg = np.degrees(angle_of_twist_rad)
+
+    # Maximum shear stress (Tresca) failure theory
+    shear_yield_stress = yield_stress / 2  # MPa
+    safety_factor = (
+        shear_yield_stress / max_shear_stress if max_shear_stress > 0 else float('inf')
+    )
+
+    radii_m = np.linspace(0, radius_m, num_points)
+    shear_stress_distribution = (torque * radii_m / polar_moment) / 1e6  # MPa
+
+    return {
+        'torque': torque,
+        'diameter': diameter,
+        'length': length,
+        'max_shear_stress': float(max_shear_stress),
+        'shear_modulus': float(shear_modulus),
+        'polar_moment': float(polar_moment),
+        'angle_of_twist_deg': float(angle_of_twist_deg),
+        'angle_of_twist_rad': float(angle_of_twist_rad),
+        'shear_yield_stress': float(shear_yield_stress),
+        'safety_factor': float(safety_factor),
+        'distribution': [
+            {'radius_mm': float(r * 1000), 'shear_stress': float(tau)}
+            for r, tau in zip(radii_m, shear_stress_distribution)
+        ],
+        'properties': {
+            'youngs_modulus': youngs_modulus,
+            'poisson_ratio': poisson_ratio,
+            'yield_stress': yield_stress,
+        },
+    }
+
+
 # Example usage and testing
 if __name__ == '__main__':
     # Test stress-strain calculation

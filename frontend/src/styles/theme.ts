@@ -1,68 +1,77 @@
 /**
- * SimMec Color Theme System
- * Light Gray + Light Blue Design
+ * SimMec Design System — "Free Body"
+ * Warm paper background, editorial technical-drafting aesthetic.
  */
 
 export const theme = {
   // Primary Colors
   colors: {
-    // Light Blue Palette
+    // Blue accent (visualization / secondary actions) — was "lightBlue"
     lightBlue: {
-      50: '#f0f9fc',
-      100: '#e0f2f9',
-      200: '#c1e6f4',
-      300: '#a1d9f0',
-      400: '#70c8eb',
-      500: '#4a9bb5',  // Primary Blue
-      600: '#3a8fa5',
-      700: '#2a7f95',
-      800: '#1a6f85',
-      900: '#0a5f75',
+      50: '#E9F0F8',
+      100: '#D3E1F1',
+      200: '#A7C3E3',
+      300: '#7BA5D5',
+      400: '#4676AE',
+      500: '#1E4E8C', // Primary accent blue
+      600: '#1A4478',
+      700: '#153864',
+      800: '#102A4A',
+      900: '#0A1D33',
     },
 
-    // Light Gray Palette
+    // Warm paper / ink neutrals — was "gray"
     gray: {
-      50: '#f9fafb',
-      100: '#f5f7fa',   // Light Gray (Secondary BG)
-      200: '#eef2f7',
-      300: '#e5eaf2',
-      400: '#d1dce9',
-      500: '#9ca3af',
-      600: '#6b7280',
-      700: '#4b5563',
-      800: '#2c3e50',   // Dark Gray (Text)
-      900: '#1a202c',
+      50: '#FBFAF6', // Card surface
+      100: '#F3F0E8', // Page background
+      200: '#E4DFD2',
+      300: '#D6D1C4', // Border
+      400: '#C9C3B4', // Input border
+      500: '#9AA0A8',
+      600: '#6B7079',
+      700: '#4F5560',
+      800: '#2A2F36', // Body ink
+      900: '#16191D', // Primary ink
     },
 
     // Accent Colors
-    success: '#10b981',
-    warning: '#f59e0b',
-    error: '#ef4444',
-    info: '#4a9bb5',
+    success: '#2F6F4E',
+    warning: '#B8400C',
+    error: '#9A3412',
+    info: '#1E4E8C',
+
+    // Orange accent (primary CTAs / highlights)
+    accent: {
+      500: '#C2410C',
+      600: '#B8400C',
+      light: '#F3A57E',
+    },
 
     // Semantic
     text: {
-      primary: '#2c3e50',      // Dark Gray
-      secondary: '#6b7280',
-      light: '#9ca3af',
+      primary: '#16191D',
+      secondary: '#3F454E',
+      light: '#6B7079',
     },
     bg: {
-      primary: '#ffffff',
-      secondary: '#f5f7fa',    // Light Gray
-      tertiary: '#e0f2f9',     // Light Blue
+      primary: '#FBFAF6',
+      secondary: '#F3F0E8',
+      tertiary: '#E9F0F8',
     },
-    border: '#e5eaf2',
+    border: '#D6D1C4',
   },
 
-  // Typography - Eye-catching fonts
+  // Typography
   typography: {
     fontFamily: {
-      // Headings: Bold, modern, eye-catching
-      heading: '"Poppins", "Inter", "Segoe UI", sans-serif',
-      // Body: Clean, highly readable
-      base: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif',
-      // Code: Monospace, professional
-      mono: '"JetBrains Mono", "Fira Code", "SF Mono", Monaco, monospace',
+      // Headings: distinctive geometric sans
+      heading: '"Space Grotesk", "Inter", "Segoe UI", sans-serif',
+      // Body: clean, highly readable
+      base: '"IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif',
+      // Code / labels: monospace
+      mono: '"IBM Plex Mono", "Fira Code", "SF Mono", Monaco, monospace',
+      // Formulas: italic serif
+      serif: '"STIX Two Text", "Times New Roman", serif',
     },
     fontSize: {
       xs: '0.75rem',      // 12px
@@ -96,6 +105,7 @@ export const theme = {
     2: '0.5rem',    // 8px
     3: '0.75rem',   // 12px
     4: '1rem',      // 16px
+    5: '1.25rem',   // 20px
     6: '1.5rem',    // 24px
     8: '2rem',      // 32px
     10: '2.5rem',   // 40px
@@ -103,25 +113,25 @@ export const theme = {
     16: '4rem',     // 64px
   },
 
-  // Shadows
+  // Shadows — hard, offset (drafting-table feel), no blur
   shadows: {
-    xs: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-    sm: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-    base: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-    md: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-    lg: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-    xl: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+    xs: '0 1px 2px 0 rgba(22, 25, 29, 0.06)',
+    sm: '0 1px 3px 0 rgba(22, 25, 29, 0.08)',
+    base: '4px 4px 0 #16191D',
+    md: '6px 6px 0 #16191D',
+    lg: '10px 10px 0 #16191D',
+    xl: '14px 14px 0 #16191D',
   },
 
-  // Border Radius
+  // Border Radius — small, drafted corners rather than soft/rounded
   radius: {
     none: '0',
     sm: '0.125rem',   // 2px
     base: '0.25rem',  // 4px
     md: '0.375rem',   // 6px
     lg: '0.5rem',     // 8px
-    xl: '0.75rem',    // 12px
-    '2xl': '1rem',    // 16px
+    xl: '0.5rem',
+    '2xl': '0.5rem',
     full: '9999px',
   },
 
@@ -151,7 +161,7 @@ export const theme = {
 export const componentStyles = {
   // Visualization Areas
   visualization: {
-    background: theme.colors.bg.secondary,  // Light Gray
+    background: theme.colors.bg.primary,
     border: `1px solid ${theme.colors.border}`,
     borderRadius: theme.radius.lg,
     padding: theme.spacing[6],
@@ -160,8 +170,8 @@ export const componentStyles = {
 
   // Info Boxes
   infoBox: {
-    background: theme.colors.lightBlue[50],
-    border: `1px solid ${theme.colors.lightBlue[200]}`,
+    background: theme.colors.bg.primary,
+    border: `1px solid ${theme.colors.border}`,
     borderRadius: theme.radius.md,
     padding: theme.spacing[4],
     color: theme.colors.text.primary,
@@ -176,24 +186,6 @@ export const componentStyles = {
     fontFamily: theme.typography.fontFamily.mono,
     fontSize: theme.typography.fontSize.sm,
     overflowX: 'auto' as const,
-  },
-};
-
-// Dark mode theme (optional)
-export const darkTheme = {
-  colors: {
-    ...theme.colors,
-    text: {
-      primary: '#f3f4f6',
-      secondary: '#d1d5db',
-      light: '#9ca3af',
-    },
-    bg: {
-      primary: '#111827',
-      secondary: '#1f2937',
-      tertiary: '#1a3a42',
-    },
-    border: '#374151',
   },
 };
 
