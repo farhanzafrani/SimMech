@@ -279,7 +279,7 @@ export default function FourBarLinkage() {
               Performance
             </h3>
 
-            {loading && (
+            {loading && !data?.performance && (
               <div style={{ color: theme.colors.text.secondary }}>
                 <span className="spinner"></span>
                 Computing...
@@ -288,8 +288,8 @@ export default function FourBarLinkage() {
 
             {error && <div className="error-message">{error}</div>}
 
-            {!loading && data?.performance && (
-              <div style={{ display: 'grid', gap: theme.spacing[2] }}>
+            {data?.performance && (
+              <div style={{ display: 'grid', gap: theme.spacing[2], opacity: loading ? 0.6 : 1, transition: 'opacity 150ms ease-in-out' }}>
                 <div
                   style={{
                     padding: theme.spacing[2],
