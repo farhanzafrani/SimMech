@@ -1,5 +1,7 @@
 """4-Bar Linkage Kinematics API routes"""
 
+import math
+
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Optional
@@ -63,6 +65,8 @@ async def compute_linkage(request: FourBarComputeRequest):
 
         return result
 
+    except HTTPException:
+        raise
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
@@ -85,8 +89,18 @@ async def get_motion_curve(request: MotionCurveRequest):
             num_points=request.num_points,
         )
 
+        # NaN/inf (e.g. an unassemblable link set) cannot be serialized to JSON
+        for key in ('output_angles', 'transmission_angles', 'mechanical_advantages'):
+            if any(v is not None and not math.isfinite(v) for v in result[key]):
+                raise HTTPException(
+                    status_code=400,
+                    detail="Link lengths cannot be assembled into a valid 4-bar mechanism (non-finite result)",
+                )
+
         return result
 
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Curve generation error: {str(e)}")
 

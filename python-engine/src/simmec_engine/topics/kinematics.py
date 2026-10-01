@@ -54,7 +54,7 @@ def compute_4bar_linkage(
     cos_angle_D = np.clip(cos_angle_D, -1, 1)  # Numerical stability
 
     # Angle at C between CB and CD
-    angle_CB = np.arctan2(C_y - 0, C_x - L1)
+    angle_CB = np.arctan2(0 - C_y, L1 - C_x)  # direction C -> B
 
     # Angle BCD (law of cosines)
     cos_angle_C = (BC_dist**2 + L3**2 - L4**2) / (2 * BC_dist * L3)
