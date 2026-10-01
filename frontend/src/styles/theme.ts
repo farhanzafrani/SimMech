@@ -1,68 +1,85 @@
 /**
- * SimMec Color Theme System
- * Light Gray + Light Blue Design
+ * Free Body design system
+ * Cobalt blue + signal lime on a navy ink, set in big rounded "bento" surfaces.
+ * Type: DM Serif Display (headings), DM Sans (body), STIX Two Text (equations),
+ * JetBrains Mono (data).
  */
 
 export const theme = {
   // Primary Colors
   colors: {
-    // Light Blue Palette
+    // Cobalt — primary accent (CTAs, identity, links)
     lightBlue: {
-      50: '#f0f9fc',
-      100: '#e0f2f9',
-      200: '#c1e6f4',
-      300: '#a1d9f0',
-      400: '#70c8eb',
-      500: '#4a9bb5',  // Primary Blue
-      600: '#3a8fa5',
-      700: '#2a7f95',
-      800: '#1a6f85',
-      900: '#0a5f75',
+      50: '#EEF1FF',
+      100: '#DCE3FF',
+      200: '#C9D4FF',
+      300: '#A9BBFF',
+      400: '#7D97FF',
+      500: '#2B4FE3', // Primary accent
+      600: '#1F3BB3',
+      700: '#1A35B8',
+      800: '#16255A',
+      900: '#0E1A3D',
     },
 
-    // Light Gray Palette
+    // Neutrals — cool greys with a navy ink
     gray: {
-      50: '#f9fafb',
-      100: '#f5f7fa',   // Light Gray (Secondary BG)
-      200: '#eef2f7',
-      300: '#e5eaf2',
-      400: '#d1dce9',
-      500: '#9ca3af',
-      600: '#6b7280',
-      700: '#4b5563',
-      800: '#2c3e50',   // Dark Gray (Text)
-      900: '#1a202c',
+      50: '#FFFFFF', // Card surface
+      100: '#F1F1F4', // Soft panel surface
+      200: '#E4E4EA', // Hairline border
+      300: '#C9C9D2',
+      400: '#9A9AA5',
+      500: '#7A7A85',
+      600: '#55555E',
+      700: '#2C3D7A',
+      800: '#22336E', // Body ink
+      900: '#0E1A3D', // Navy — dark panels
     },
 
     // Accent Colors
-    success: '#10b981',
-    warning: '#f59e0b',
-    error: '#ef4444',
-    info: '#4a9bb5',
+    success: '#2E9B54',
+    warning: '#E0A100',
+    error: '#E2483D',
+    info: '#2B4FE3',
+
+    // Signal lime — highlights, active marks, "on" state
+    accent: {
+      500: '#2B4FE3',
+      600: '#1F3BB3',
+      light: '#C8F04B',
+    },
+
+    // Extra signal colors — category tags, step markers.
+    spectrum: {
+      cyan: '#2B4FE3',
+      coral: '#E2483D',
+      sun: '#E0A100',
+      leaf: '#8FD400',
+      violet: '#7B5CFA',
+      lime: '#C8F04B',
+    },
 
     // Semantic
     text: {
-      primary: '#2c3e50',      // Dark Gray
-      secondary: '#6b7280',
-      light: '#9ca3af',
+      primary: '#111113',
+      secondary: '#22336E',
+      light: '#55555E',
     },
     bg: {
-      primary: '#ffffff',
-      secondary: '#f5f7fa',    // Light Gray
-      tertiary: '#e0f2f9',     // Light Blue
+      primary: '#FFFFFF',
+      secondary: '#F1F1F4',
+      tertiary: '#EEF1FF',
     },
-    border: '#e5eaf2',
+    border: '#E4E4EA',
   },
 
-  // Typography - Eye-catching fonts
+  // Typography
   typography: {
     fontFamily: {
-      // Headings: Bold, modern, eye-catching
-      heading: '"Poppins", "Inter", "Segoe UI", sans-serif',
-      // Body: Clean, highly readable
-      base: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif',
-      // Code: Monospace, professional
+      heading: '"DM Serif Display", "Georgia", serif',
+      base: '"DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif',
       mono: '"JetBrains Mono", "Fira Code", "SF Mono", Monaco, monospace',
+      serif: '"STIX Two Text", "Georgia", serif',
     },
     fontSize: {
       xs: '0.75rem',      // 12px
@@ -96,6 +113,7 @@ export const theme = {
     2: '0.5rem',    // 8px
     3: '0.75rem',   // 12px
     4: '1rem',      // 16px
+    5: '1.25rem',   // 20px
     6: '1.5rem',    // 24px
     8: '2rem',      // 32px
     10: '2.5rem',   // 40px
@@ -103,25 +121,25 @@ export const theme = {
     16: '4rem',     // 64px
   },
 
-  // Shadows
+  // Shadows — soft, low-contrast; surfaces are separated by tone more than blur
   shadows: {
-    xs: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-    sm: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-    base: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-    md: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-    lg: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-    xl: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+    xs: '0 1px 2px 0 rgba(14, 26, 61, 0.05)',
+    sm: '0 2px 6px 0 rgba(14, 26, 61, 0.07)',
+    base: '0 6px 16px 0 rgba(14, 26, 61, 0.08)',
+    md: '0 10px 28px 0 rgba(14, 26, 61, 0.10)',
+    lg: '0 20px 44px 0 rgba(14, 26, 61, 0.14)',
+    xl: '0 30px 60px 0 rgba(10, 26, 107, 0.30)',
   },
 
-  // Border Radius
+  // Border Radius — large, friendly "bento" corners
   radius: {
     none: '0',
-    sm: '0.125rem',   // 2px
-    base: '0.25rem',  // 4px
-    md: '0.375rem',   // 6px
-    lg: '0.5rem',     // 8px
-    xl: '0.75rem',    // 12px
-    '2xl': '1rem',    // 16px
+    sm: '0.5rem',     // 8px
+    base: '0.625rem', // 10px
+    md: '0.875rem',   // 14px
+    lg: '1.25rem',    // 20px
+    xl: '1.75rem',    // 28px
+    '2xl': '2.25rem', // 36px
     full: '9999px',
   },
 
@@ -151,7 +169,7 @@ export const theme = {
 export const componentStyles = {
   // Visualization Areas
   visualization: {
-    background: theme.colors.bg.secondary,  // Light Gray
+    background: theme.colors.bg.secondary,
     border: `1px solid ${theme.colors.border}`,
     borderRadius: theme.radius.lg,
     padding: theme.spacing[6],
