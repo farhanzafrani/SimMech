@@ -2,15 +2,23 @@
 Shaft Design Module - ASME Combined Bending-and-Torsion Fatigue Sizing
 Used by Topic: Shaft Design Under Combined Bending and Torsion (MIT 2.72)
 
-Implements the ASME "DE-Goodman" shaft-diameter equation for a rotating
+Implements the "DE-Goodman" shaft-diameter equation (distortion energy +
+modified Goodman line, as in Shigley) for a rotating
 shaft that sees an alternating bending moment (from a hung gear/pulley,
 fully reversed as the shaft rotates) combined with a steady torque, at a
 geometric discontinuity (shoulder fillet, keyway, etc.) described by a
 stress-concentration factor K_t and a material notch sensitivity q.
 
-    d^3 = (32 n / pi) * sqrt[ (Kf * Ma / Se)^2 + (3/4)(Kfs * Tm / Sut)^2 ]
+    d^3 = (16 n / pi) * [ 2 Kf Ma / Se + sqrt(3) Kfs Tm / Sut ]
     Kf  = 1 + q (Kt - 1)
     sigma_a' = Kf * 32 * Ma / (pi * d^3)
+
+Derivation: at the surface, the alternating bending stress is sigma_a = 32 Kf Ma / (pi d^3)
+(von Mises equivalent sigma_a' = sigma_a) and the steady shear is tau_m = 16 Kfs Tm / (pi d^3)
+(von Mises equivalent sigma_m' = sqrt(3) tau_m). Substituting those into the modified Goodman
+line sigma_a'/Se + sigma_m'/Sut = 1/n gives the equation above. The two terms are ADDED
+(a linear sum), which is the conservative form; combining them in quadrature would under-size
+the shaft.
 
 Unit convention (documented carefully because this equation is unit-sensitive):
     - Moments (M_a, T_m) are taken in N*m, the natural unit for a torque/
@@ -23,23 +31,23 @@ Unit convention (documented carefully because this equation is unit-sensitive):
       dividing by a stress in MPa. The resulting d^3 is then in mm^3, and
       d comes out directly in millimeters - no further conversion needed.
 
-Simplification: only one stress-concentration factor/notch-sensitivity pair
-is provided (as is typical when a single shoulder fillet governs both the
-bending and torsional stress risers at that section), so Kfs is taken equal
-to Kf. This is the standard simplification used when separate K_t charts for
-bending vs. torsion aren't being looked up separately.
+Simplification: unless `torsion_fatigue_factor` is supplied, a single
+stress-concentration factor/notch-sensitivity pair is used (as is typical when
+a single shoulder fillet governs both the bending and torsional stress risers
+at that section), so Kfs is taken equal to Kf. Pass `torsion_fatigue_factor`
+to use a separate Kfs for the torsional stress riser.
 
 Hand-verification (used while developing this module):
     Ma = 100 N*m, Tm = 50 N*m, Se = 200 MPa, Sut = 600 MPa, Kt = 1.5,
-    q = 0.8, n = 2  ->  Kf = 1.4, d ~= 24.33 mm, sigma_a' ~= 98.97 MPa.
-    Back-substituting d = 24.33 mm recovers a safety factor of ~2.00,
+    q = 0.8, n = 2  ->  Kf = 1.4, d ~= 25.37 mm, sigma_a' ~= 87.39 MPa.
+    Back-substituting d = 25.37 mm recovers a safety factor of ~2.00,
     confirming the forward/inverse formulas are consistent. This falls
     within the 20-40 mm range typical of Shigley-style worked examples
     for moderate moments on 200-700 MPa steels.
 """
 
 import numpy as np
-from typing import Dict
+from typing import Dict, Optional
 
 
 def compute_shaft_design(
@@ -51,9 +59,10 @@ def compute_shaft_design(
     notch_sensitivity: float,
     target_safety_factor: float,
     num_points: int = 40,
+    torsion_fatigue_factor: Optional[float] = None,
 ) -> Dict:
     """
-    Compute the ASME DE-Goodman shaft diameter for combined alternating
+    Compute the DE-Goodman shaft diameter for combined alternating
     bending and steady torsion at a stress-concentration feature (fillet).
 
     Args:
@@ -68,6 +77,8 @@ def compute_shaft_design(
         target_safety_factor: Desired design factor of safety n, > 0
         num_points: Number of points to sample for the diameter-vs-safety-
             factor curve
+        torsion_fatigue_factor: Optional separate fatigue factor K_fs for the
+            torsional stress riser, >= 1. Defaults to K_f when omitted.
 
     Returns:
         Dictionary with the fatigue stress-concentration factor K_f, the
@@ -88,6 +99,8 @@ def compute_shaft_design(
         raise ValueError("Stress-concentration factor K_t must be >= 1")
     if not (0 <= notch_sensitivity <= 1):
         raise ValueError("Notch sensitivity q must be between 0 and 1")
+    if torsion_fatigue_factor is not None and torsion_fatigue_factor < 1:
+        raise ValueError("Torsion fatigue factor K_fs must be >= 1")
     if alternating_moment < 0 or mean_torque < 0:
         raise ValueError("Moments must be non-negative")
     if alternating_moment == 0 and mean_torque == 0:
@@ -98,19 +111,21 @@ def compute_shaft_design(
         stress_concentration_factor - 1
     )
     kf = fatigue_stress_concentration_factor
-    kfs = kf  # same fillet assumed to govern both bending and torsional risers
+    # Same fillet assumed to govern both bending and torsional risers unless Kfs is given
+    kfs = kf if torsion_fatigue_factor is None else torsion_fatigue_factor
 
     # Convert moments from N*m to N*mm so they pair correctly with MPa (N/mm^2)
     ma_nmm = alternating_moment * 1000.0
     tm_nmm = mean_torque * 1000.0
 
-    # Bending-fatigue term and torsion-steady term, both in mm^3
-    bending_term = kf * ma_nmm / endurance_limit
-    torsion_term = kfs * tm_nmm / ultimate_strength
-    combined = float(np.sqrt(bending_term**2 + 0.75 * torsion_term**2))
+    # Bending-fatigue term (von Mises alternating, 2*Kf*Ma/Se) and torsion-steady term
+    # (von Mises mean, sqrt(3)*Kfs*Tm/Sut), both in mm^3. DE-Goodman ADDS them.
+    bending_term = 2.0 * kf * ma_nmm / endurance_limit
+    torsion_term = np.sqrt(3.0) * kfs * tm_nmm / ultimate_strength
+    combined = float(bending_term + torsion_term)
 
-    # d^3 = (32n/pi) * combined  ->  d in mm
-    diameter_cubed = (32.0 * target_safety_factor / np.pi) * combined
+    # d^3 = (16n/pi) * combined  ->  d in mm
+    diameter_cubed = (16.0 * target_safety_factor / np.pi) * combined
     required_diameter = float(diameter_cubed ** (1.0 / 3.0))
 
     # Actual alternating von Mises stress at the fillet, at the required diameter
@@ -122,7 +137,7 @@ def compute_shaft_design(
     # resulting safety factor too ("check n given d" mode).
     rounded_diameter = float(np.ceil(required_diameter))
     rounded_safety_factor = (
-        float((np.pi * rounded_diameter**3 / 32.0) / combined)
+        float((np.pi * rounded_diameter**3 / 16.0) / combined)
         if combined > 0
         else float("inf")
     )
@@ -132,7 +147,7 @@ def compute_shaft_design(
     d_max = max(required_diameter * 2.0, d_min + 1.0)
     diameters = np.linspace(d_min, d_max, num_points)
     if combined > 0:
-        safety_factors = (np.pi * diameters**3 / 32.0) / combined
+        safety_factors = (np.pi * diameters**3 / 16.0) / combined
     else:
         safety_factors = np.full_like(diameters, np.inf)
 

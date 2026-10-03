@@ -28,7 +28,7 @@ const gearToothBending: TopicMeta = {
     { label: 'Pitch diameter', formula: 'd = N / P_d', latex: 'd = \\frac{N}{P_d}', note: 'N = number of teeth, P_d = diametral pitch in teeth per inch.' },
     { label: 'Tangential tooth load from transmitted torque', formula: 'W^t = 2T / d', latex: 'W^t = \\frac{2T}{d}', note: 'T = transmitted torque, d = pitch diameter.' },
     { label: 'Lewis bending stress', formula: 'σ = W^t P_d / (F Y)', latex: '\\sigma = \\frac{W^t P_d}{F Y}', note: 'F = face width, Y = Lewis form factor (depends on tooth count; 0.322 for 20 teeth at 20° pressure angle).', emphasis: true },
-    { label: 'Velocity factor (hobbed or shaped teeth)', formula: 'K_v = (1200 + V) / 1200', latex: 'K_v = \\frac{1200 + V}{1200}', note: 'V = pitch-line velocity in ft/min; stress is multiplied by K_v to allow for dynamic loading.' },
+    { label: 'Velocity factor (cut or milled teeth)', formula: 'K_v = (1200 + V) / 1200', latex: 'K_v = \\frac{1200 + V}{1200}', note: 'V = pitch-line velocity in ft/min; stress is multiplied by K_v to allow for dynamic loading. This form is for cut or milled tooth profiles; hobbed or shaped teeth use K_v = (78 + √V)/78, and more accurately made teeth have a smaller K_v still.' },
   ],
   workedExample: {
     given: 'A 20-tooth spur gear (20° pressure angle, Lewis form factor Y = 0.322), diametral pitch P_d = 8 teeth/in, face width F = 1.25 in, transmits a torque T = 850 lbf·in.',
@@ -72,11 +72,11 @@ const beltChainDrives: TopicMeta = {
   formulas: [
     { label: 'Speed ratio', formula: 'N2 / N1 = d1 / d2', latex: '\\frac{N_2}{N_1} = \\frac{d_1}{d_2}', note: 'Output speed set purely by the ratio of pulley diameters, same as gears. For a chain, use sprocket tooth counts: N₂/N₁ = z₁/z₂.' },
     { label: 'Wrap angle on the smaller pulley (open belt)', formula: 'θ = π − 2 asin((d₂ − d₁) / 2C)', latex: '\\theta = \\pi - 2\\arcsin\\frac{d_2 - d_1}{2C}', note: 'C = center distance; moving pulleys apart lengthens the belt run but shrinks the difference in wrap on the two pulleys.' },
-    { label: 'Belt tension ratio (capstan equation)', formula: 'T1 / T2 = e^(μθ)', latex: '\\frac{T_1}{T_2} = e^{\\mu\\theta}', note: 'μ = friction coefficient, θ = wrap angle in radians; the maximum tension ratio before slipping. For a V-belt use μ / sin(β/2) in place of μ.', emphasis: true },
+    { label: 'Belt tension ratio (capstan equation)', formula: 'T1 / T2 = e^(μθ)', latex: '\\frac{T_1}{T_2} = e^{\\mu\\theta}', note: 'μ = friction coefficient, θ = wrap angle in radians; the maximum tension ratio before slipping. For a V-belt use μ / sin(β/2) in place of μ. This form neglects centrifugal tension, which grows with belt speed squared and has to be subtracted from both tensions on a fast belt.', emphasis: true },
     { label: 'Power transmitted', formula: 'P = (T1 − T2)·v', latex: 'P = (T_1 - T_2)v', note: 'v = belt speed; only the difference in tension does useful work, the rest is just belt preload.' },
   ],
   workedExample: {
-    given: 'A flat-belt drive: driving pulley d1 = 150 mm at N1 = 1750 rpm, driven pulley d2 = 300 mm, center distance C = 432 mm (which gives a wrap angle on the small pulley of θ = 160° = 2.79 rad), friction coefficient μ = 0.3, tight-side tension T1 = 500 N.',
+    given: 'A flat-belt drive: driving pulley d1 = 150 mm at N1 = 1750 rpm, driven pulley d2 = 300 mm, center distance C = 432 mm (which gives a wrap angle on the small pulley of θ = 160° = 2.79 rad), friction coefficient μ = 0.3, tight-side tension T1 = 500 N. Centrifugal tension is neglected, a simplification that gets worse as belt speed rises.',
     find: 'The output speed, the slack-side tension, and the power transmitted.',
     steps: [
       'Speed ratio: N2 = N1 d1/d2 = 1750(150)/300 = 875 rpm',

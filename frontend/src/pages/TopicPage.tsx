@@ -3,6 +3,7 @@ import type { ReactNode } from 'react'
 import { findTopic, adjacentTopics, courseLevelSpan } from '../config/curriculum'
 import { TOPIC_REGISTRY } from '../config/topicRegistry'
 import { lessonUnits } from '../config/lessonUnits'
+import { getTeaching } from '../config/teaching'
 import { useActiveSection } from '../hooks/useActiveSection'
 import TopicSidebar from '../components/layout/TopicSidebar'
 import Logo from '../components/layout/Logo'
@@ -15,6 +16,9 @@ import LevelBadge from '../components/LevelBadge'
 import ApplicationsPanel from '../components/ApplicationsPanel'
 import LearningObjectives from '../components/LearningObjectives'
 import WorkedExamplePanel from '../components/WorkedExamplePanel'
+import VideoEmbed from '../components/teaching/VideoEmbed'
+import Quiz from '../components/teaching/Quiz'
+import { IntuitionCallout, Prerequisites, Derivation, EngineerNotes } from '../components/teaching/TeachingBlocks'
 import { theme } from '../styles/theme'
 
 const NAVY = theme.colors.gray[900]
@@ -58,7 +62,8 @@ export default function TopicPage() {
   const { courseId = '', topicId = '' } = useParams()
   const { course, topic } = findTopic(courseId, topicId)
   const implementation = topic ? TOPIC_REGISTRY[topic.id] : undefined
-  const units = topic ? lessonUnits(topic, Boolean(implementation)) : []
+  const teaching = topic ? getTeaching(topic.id) : undefined
+  const units = topic ? lessonUnits(topic, Boolean(implementation), teaching) : []
   const activeUnit = useActiveSection(units.map((u) => u.id))
 
   if (!course || !topic) {
@@ -163,6 +168,8 @@ export default function TopicPage() {
             </div>
 
             {topic.learningObjectives && <LearningObjectives objectives={topic.learningObjectives} />}
+            {teaching && <IntuitionCallout text={teaching.intuition} />}
+            {teaching?.prerequisites && <Prerequisites items={teaching.prerequisites} />}
           </section>
 
           {/* Formulas */}
@@ -174,6 +181,14 @@ export default function TopicPage() {
                   <FormulaCard key={f.label} {...f} />
                 ))}
               </div>
+            </section>
+          )}
+
+          {/* Derivation */}
+          {teaching?.derivation && teaching.derivation.length > 0 && (
+            <section id="derivation" style={{ display: 'flex', flexDirection: 'column', gap: 24, scrollMarginTop: 16 }}>
+              <UnitHeading no={unitNo('derivation')} kicker="Derivation" title="Where the equation comes from" />
+              <Derivation steps={teaching.derivation} />
             </section>
           )}
 
@@ -204,6 +219,14 @@ export default function TopicPage() {
                 </figure>
                 {topic.realImage && <RealPhoto image={topic.realImage} />}
               </div>
+            </section>
+          )}
+
+          {/* Videos */}
+          {teaching?.videos && teaching.videos.length > 0 && (
+            <section id="videos" style={{ display: 'flex', flexDirection: 'column', gap: 24, scrollMarginTop: 16 }}>
+              <UnitHeading no={unitNo('videos')} kicker="Watch" title="See it explained" />
+              <VideoEmbed videos={teaching.videos} />
             </section>
           )}
 
@@ -246,6 +269,22 @@ export default function TopicPage() {
                   </div>
                 ))}
               </div>
+            </section>
+          )}
+
+          {/* Quiz */}
+          {teaching?.quiz && teaching.quiz.length > 0 && (
+            <section id="quiz" style={{ display: 'flex', flexDirection: 'column', gap: 24, scrollMarginTop: 16 }}>
+              <UnitHeading no={unitNo('quiz')} kicker="Quiz" title="Check your understanding" />
+              <Quiz topicId={topic.id} questions={teaching.quiz} />
+            </section>
+          )}
+
+          {/* Engineer's notes */}
+          {teaching && (
+            <section id="engineer-notes" style={{ display: 'flex', flexDirection: 'column', gap: 24, scrollMarginTop: 16 }}>
+              <UnitHeading no={unitNo('engineer-notes')} kicker="Field notes" title="Pitfalls and rules of thumb" />
+              <EngineerNotes mistakes={teaching.commonMistakes} rulesOfThumb={teaching.rulesOfThumb} checklist={teaching.designChecklist} />
             </section>
           )}
 

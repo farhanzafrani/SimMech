@@ -386,7 +386,7 @@ const BASE_CURRICULUM: CourseMeta[] = [
         ],
         formulas: [
           { label: 'Average (center) stress', formula: 'σ_avg = (σ_x + σ_y) / 2', latex: '\\sigma_{avg} = \\frac{\\sigma_x + \\sigma_y}{2}', note: 'The center of Mohr\u2019s circle on the normal-stress axis.' },
-          { label: "Mohr's circle radius", formula: 'R = √[((σ_x − σ_y)/2)² + τ_xy²]', latex: 'R = \\sqrt{\\left(\\frac{\\sigma_x - \\sigma_y}{2}\\right)^2 + \\tau_{xy}^2}', note: 'The radius of the circle — also the maximum shear stress at any orientation.' },
+          { label: "Mohr's circle radius", formula: 'R = √[((σ_x − σ_y)/2)² + τ_xy²]', latex: 'R = \\sqrt{\\left(\\frac{\\sigma_x - \\sigma_y}{2}\\right)^2 + \\tau_{xy}^2}', note: 'The radius of the circle — also the maximum in-plane shear stress (the absolute maximum also involves σ₃ = 0).' },
           { label: 'Principal stresses', formula: 'σ_1,2 = σ_avg ± R', latex: '\\sigma_{1,2} = \\sigma_{avg} \\pm R', note: 'The two points where the circle crosses the axis where shear is zero.', emphasis: true },
         ],
         workedExample: {
@@ -582,7 +582,7 @@ const BASE_CURRICULUM: CourseMeta[] = [
         level: 'Advanced',
         summary: 'Size a rotating shaft for combined bending-and-torsion fatigue loading, including stress concentration at a fillet.',
         description:
-          'A power-transmission shaft rarely sees pure torsion — a gear or pulley hung off it adds bending, and the step or keyway needed to seat that gear concentrates the local stress well above the nominal value. The ASME shaft-design equation folds all three effects — combined loading, stress concentration, and fatigue-versus-steady stress — into a single formula for the minimum safe diameter.',
+          'A power-transmission shaft rarely sees pure torsion — a gear or pulley hung off it adds bending, and the step or keyway needed to seat that gear concentrates the local stress well above the nominal value. The DE-Goodman shaft equation folds all three effects — combined loading, stress concentration, and fatigue-versus-steady stress — into a single formula for the minimum safe diameter.',
         status: 'active',
         manimSrc: 'animations/shaft-design.mp4',
         realImage: {
@@ -593,12 +593,12 @@ const BASE_CURRICULUM: CourseMeta[] = [
           license: 'Public domain',
         },
         learningObjectives: [
-          'Apply the ASME DE-Goodman equation to size a shaft under combined bending fatigue and steady torsion',
+          'Apply the DE-Goodman equation to size a shaft under combined bending fatigue and steady torsion',
           'Account for stress concentration at a fillet or keyway using K_f and K_fs',
           "Explain why a shaft's required diameter can jump even when the nominal bending stress hasn't changed",
         ],
         formulas: [
-          { label: 'ASME shaft diameter (DE-Goodman)', formula: 'd³ = (32n/π)·√[(K_f M_a/S_e)² + (3/4)(K_fs T_m/S_ut)²]', latex: 'd^3 = \\frac{32n}{\\pi}\\sqrt{\\left(\\frac{K_f M_a}{S_e}\\right)^2 + \\frac{3}{4}\\left(\\frac{K_{fs} T_m}{S_{ut}}\\right)^2}', note: 'The standard combined bending-fatigue / torsion-steady sizing equation; M_a is alternating bending moment, T_m is steady torque.', emphasis: true },
+          { label: 'Shaft diameter (DE-Goodman)', formula: 'd³ = (16n/π)·[2 K_f M_a/S_e + √3 K_fs T_m/S_ut]', latex: 'd^3 = \\frac{16n}{\\pi}\\left[\\frac{2 K_f M_a}{S_e} + \\frac{\\sqrt{3}\\,K_{fs} T_m}{S_{ut}}\\right]', note: 'Distortion-energy stresses fed into the modified Goodman line; the bending-fatigue and steady-torsion terms add (a linear sum), which is the conservative form. M_a is alternating bending moment, T_m is steady torque.', emphasis: true },
           { label: 'Fatigue stress-concentration factor', formula: 'K_f = 1 + q(K_t − 1)', latex: 'K_f = 1 + q(K_t - 1)', note: 'q is the notch sensitivity (0 to 1); a sharper fillet raises K_t but a more notch-sensitive material turns more of that into real fatigue damage.' },
           { label: 'Alternating von Mises stress at the fillet', formula: "σ_a' = K_f · 32 M_a / (π d³)", latex: "\\sigma_a' = K_f \\frac{32 M_a}{\\pi d^3}", note: 'The actual local stress the S-N curve / Goodman line needs to be checked against.' },
         ],
@@ -607,16 +607,16 @@ const BASE_CURRICULUM: CourseMeta[] = [
           find: 'The minimum shaft diameter.',
           steps: [
             'Convert to consistent units (N·mm, MPa): M_a = 200,000 N·mm, T_m = 150,000 N·mm',
-            'Bending term: K_f M_a / S_e = 1.6(200,000)/300 ≈ 1067 mm³',
-            'Torsion term: K_fs T_m / S_ut = 1.3(150,000)/600 = 325 mm³',
-            'd³ = (32n/π)√[(1067)² + (3/4)(325)²] = (64/π)√(1,138,000 + 79,200) ≈ 20.37 × 1103 ≈ 22,480 mm³',
-            'd = ∛22,480 ≈ 28.2 mm → specify the next standard stock size, 30 mm',
+            'Bending term: 2 K_f M_a / S_e = 2(1.6)(200,000)/300 ≈ 2133 mm³',
+            'Torsion term: √3 K_fs T_m / S_ut = 1.732(1.3)(150,000)/600 ≈ 563 mm³',
+            'd³ = (16n/π)(2133 + 563) = (32/π)(2696) ≈ 27,460 mm³',
+            'd = ∛27,460 ≈ 30.2 mm → a 30 mm bar falls just short (n ≈ 1.97), so specify the next standard size, 32 mm (n ≈ 2.4)',
           ],
-          answer: 'A 30 mm shaft gives the required factor of safety of 2 against combined fatigue bending and steady torsion at the fillet.',
+          answer: 'A 32 mm shaft meets the required factor of safety of 2 against combined bending fatigue and steady torsion at the fillet. The minimum is 30.2 mm — a 30 mm bar is about 2 % short, which is exactly the kind of margin that matters.',
         },
         challenges: [
           'Sharpen the fillet radius at the shoulder (increase K_t). What happens to the required shaft diameter, even though the nominal bending stress hasn’t changed at all?',
-          'Remove the bending load entirely, leaving only steady torque. Does the ASME equation still need its fatigue term, or does it collapse into a static-strength check?',
+          'Remove the bending load entirely, leaving only steady torque. Does the DE-Goodman equation still need its fatigue term, or does it collapse into a static-strength check?',
         ],
         applications: [
           'Sizing a gearbox output shaft that carries both a keyway stress riser and gear bending',
@@ -706,15 +706,15 @@ const BASE_CURRICULUM: CourseMeta[] = [
           { label: 'Recommended preload (reused fastener)', formula: 'F_i = 0.75 F_p', latex: 'F_i = 0.75\\,F_p', note: 'F_p is the proof load of the bolt (proof strength × tensile stress area).' },
         ],
         workedExample: {
-          given: 'An M12, property-class-8.8 bolt (tensile stress area A_t = 84.3 mm², proof strength S_p = 660 MPa) clamps a joint with stiffness constant C = 0.25. The reused bolt later sees an external tensile load P = 20 kN.',
+          given: 'An M12, property-class-8.8 bolt (tensile stress area A_t = 84.3 mm², proof strength S_p = 580 MPa for class 8.8 up to M16) clamps a joint with stiffness constant C = 0.25. The reused bolt later sees an external tensile load P = 20 kN.',
           find: 'The preload, and the resulting bolt and member loads under P.',
           steps: [
-            'Proof load: F_p = S_p A_t = 660 × 84.3 ≈ 55.6 kN',
-            'Recommended preload (reused fastener): F_i = 0.75 F_p ≈ 41.7 kN',
-            'Bolt load under P: F_b = F_i + C·P = 41.7 + 0.25(20) = 46.7 kN',
-            'Member (clamp) load: F_m = F_i − (1−C)P = 41.7 − 0.75(20) = 26.7 kN',
+            'Proof load: F_p = S_p A_t = 580 × 84.3 ≈ 48.9 kN',
+            'Recommended preload (reused fastener): F_i = 0.75 F_p ≈ 36.7 kN',
+            'Bolt load under P: F_b = F_i + C·P = 36.7 + 0.25(20) = 41.7 kN',
+            'Member (clamp) load: F_m = F_i − (1−C)P = 36.7 − 0.75(20) = 21.7 kN',
           ],
-          answer: 'The bolt sees only 46.7 kN — not 41.7+20=61.7 kN — because most of the external load unloads the clamped members instead of stretching the bolt further. Since F_m stays positive at 26.7 kN, the joint never separates.',
+          answer: 'The bolt sees only 41.7 kN — not 36.7+20=56.7 kN — because most of the external load unloads the clamped members instead of stretching the bolt further. Since F_m stays positive at 21.7 kN, the joint never separates (it would separate at P = F_i/(1−C) ≈ 48.9 kN).',
         },
         challenges: [
           'Increase the external load P until F_m from the formula above reaches zero. What has physically happened to the joint at that point?',
@@ -1093,7 +1093,7 @@ const BASE_CURRICULUM: CourseMeta[] = [
           { label: "Newton's law of cooling", formula: 'q″ = h (T_s − T_∞)', note: 'Convective heat flux from a surface, set by the convection coefficient h.', emphasis: true },
         ],
         workedExample: {
-          given: 'Oil (ρ = 900 kg/m³, kinematic viscosity ν = 1×10⁻⁴ m²/s) flows through a pipe D = 0.02 m, length L = 50 m, at V = 0.5 m/s. The pipe surface runs at T_s = 80°C in air at T_∞ = 20°C, with convection coefficient h = 50 W/(m²·K).',
+          given: 'Oil (ρ = 900 kg/m³, kinematic viscosity ν = 1×10⁻⁴ m²/s) flows through a pipe D = 0.02 m, length L = 50 m, at V = 0.5 m/s. The pipe surface runs at T_s = 80°C in air at T_∞ = 20°C, with convection coefficient h = 50 W/(m²·K). The two parts are independent: the friction loss uses the oil flowing inside the pipe, while the heat flux uses the air outside it.',
           find: 'Whether the flow is laminar, the friction head loss, and the convective heat flux from the pipe surface.',
           steps: [
             'Re = VD/ν = 0.5(0.02) / 1×10⁻⁴ = 100 — well below 2300, so the flow is laminar.',
@@ -1147,9 +1147,9 @@ const BASE_CURRICULUM: CourseMeta[] = [
           'Relate the transmission angle to how efficiently a mechanism transmits force',
         ],
         formulas: [
-          { label: 'Grashof condition', formula: 's + l ≤ p + q', latex: 's + l \\leq p + q', note: 's = shortest link, l = longest, p and q = the other two. If true, the shortest link can fully rotate relative to its neighbors.' },
+          { label: 'Grashof condition', formula: 's + l ≤ p + q', latex: 's + l \\leq p + q', note: 's = shortest link, l = longest, p and q = the other two. If true, the shortest link can make full turns relative to the other links; which link actually rotates fully relative to the ground depends on which link is fixed. If false, no link can rotate fully.' },
           { label: 'Transmission angle', formula: 'μ = ∠(coupler, rocker)', latex: '\\mu = \\angle(\\text{coupler},\\ \\text{rocker})', note: 'Angle between the coupler and the rocker, measured at the joint connecting them. Force transmits best near μ = 90°.', emphasis: true },
-          { label: 'Mechanical advantage', formula: 'MA = τ_out / τ_in = ω_in / ω_out', latex: 'MA = \\frac{\\tau_{out}}{\\tau_{in}} = \\frac{\\omega_{in}}{\\omega_{out}}', note: 'From power balance (T·ω = const, no friction). MA is largest near μ = 90° and collapses toward μ = 0° or 180°.' },
+          { label: 'Mechanical advantage', formula: 'MA = τ_out / τ_in = ω_in / ω_out', latex: 'MA = \\frac{\\tau_{out}}{\\tau_{in}} = \\frac{\\omega_{in}}{\\omega_{out}}', note: 'From power balance (T·ω = const, no friction). The transmission angle μ governs how well force reaches the output: it is best near 90°, and force transmission degrades toward μ = 0° or 180°, where the mechanism can jam.' },
         ],
         workedExample: {
           given: 'A four-bar linkage has link lengths: ground (fixed) = 100 mm, crank (input) = 40 mm, coupler = 80 mm, rocker (output) = 70 mm.',
@@ -1179,19 +1179,25 @@ const BASE_CURRICULUM: CourseMeta[] = [
   },
 ]
 
-const SLICE_NEW_COURSES: CourseMeta[] = [...NEW_0, ...NEW_1, ...NEW_2, ...NEW_3, ...NEW_4, ...NEW_5]
-const SLICE_EXTRA_TOPICS: { courseId: string; topics: TopicMeta[] }[] = [...EXTRA_0, ...EXTRA_1, ...EXTRA_2, ...EXTRA_3, ...EXTRA_4, ...EXTRA_5]
+// Wave-2 slices are auto-discovered: any frontend/src/config/slices/wave2/*.ts that exports NEW_COURSES and/or EXTRA_TOPICS is merged in.
+type SliceModule = { NEW_COURSES?: CourseMeta[]; EXTRA_TOPICS?: { courseId: string; topics: TopicMeta[] }[] }
+const WAVE2 = Object.entries(import.meta.glob<SliceModule>('./slices/wave2/*.ts', { eager: true }))
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([, mod]) => mod)
+
+const SLICE_NEW_COURSES: CourseMeta[] = [...NEW_0, ...NEW_1, ...NEW_2, ...NEW_3, ...NEW_4, ...NEW_5, ...WAVE2.flatMap((m) => m.NEW_COURSES ?? [])]
+const SLICE_EXTRA_TOPICS: { courseId: string; topics: TopicMeta[] }[] = [
+  ...EXTRA_0, ...EXTRA_1, ...EXTRA_2, ...EXTRA_3, ...EXTRA_4, ...EXTRA_5,
+  ...WAVE2.flatMap((m) => m.EXTRA_TOPICS ?? []),
+]
 
 /** Base courses, with slice topics appended (replacing same-id stubs) and slice courses added. */
-export const CURRICULUM: CourseMeta[] = [
-  ...BASE_CURRICULUM.map((course) => {
+export const CURRICULUM: CourseMeta[] = [...BASE_CURRICULUM, ...SLICE_NEW_COURSES].map((course) => {
     const extra = SLICE_EXTRA_TOPICS.filter((e) => e.courseId === course.id).flatMap((e) => e.topics)
     if (extra.length === 0) return course
     const base = course.topics.map((t) => extra.find((x) => x.id === t.id) ?? t)
     return { ...course, topics: [...base, ...extra.filter((t) => !course.topics.some((b) => b.id === t.id))] }
-  }),
-  ...SLICE_NEW_COURSES,
-]
+})
 
 export function findTopic(courseId: string, topicId: string) {
   const course = CURRICULUM.find((c) => c.id === courseId)

@@ -67,7 +67,7 @@ def N(path, payload, *checks):
 # --------------------------------------------------------------------------
 _euler_rect = math.pi ** 2 * 200000 * (50 * 50 ** 3 / 12) / 3000 ** 2 / 1000  # kN, derived
 _shaft_kf = 1.6
-_shaft_d = (32 * 2 / math.pi * math.sqrt((_shaft_kf * 200000 / 300) ** 2 + 0.75 * (_shaft_kf * 150000 / 600) ** 2)) ** (1 / 3)
+_shaft_d = (16 * 2 / math.pi * (2 * _shaft_kf * 200000 / 300 + math.sqrt(3) * _shaft_kf * 150000 / 600)) ** (1 / 3)  # DE-Goodman, Kfs = Kf
 
 CASES = {
     # ---- stress-strain (worked example: F=40 kN on 200 mm2 -> 200 MPa, dL ~0.48 mm over 500 mm)
@@ -127,8 +127,8 @@ CASES = {
     "fatigue": N("/api/fatigue-analysis/compute",
         dict(mean_stress=90, alternating_stress=60, ultimate_strength=620, endurance_limit=280),
         ("safety_factor", 2.78, 3e-3), ("life_regime", "infinite")),
-    # ---- shaft design: pinned to the endpoint's own formula (single Kf for bending and torsion);
-    #      the worked example (Kf=1.6, Kfs=1.3 -> 30 mm) is checked in the xfail test below
+    # ---- shaft design: DE-Goodman, pinned with a single Kf for bending and torsion;
+    #      the worked example (Kf=1.6, Kfs=1.3 -> 30.2 mm) is checked in its own test below
     "shaft-design": N("/api/shaft-design/compute",
         dict(alternating_moment=200, mean_torque=150, endurance_limit=300, ultimate_strength=600,
              stress_concentration_factor=1.6, notch_sensitivity=1.0, target_safety_factor=2),
@@ -138,10 +138,10 @@ CASES = {
         dict(wire_diameter=3, coil_diameter=24, active_coils=10, shear_modulus=79000,
              applied_force=150, allowable_shear_stress=620),
         ("deflection", 26.0, 5e-3), ("max_shear_stress", 402.0, 3e-3), ("spring_index", 8.0)),
-    # ---- bolted joint (C=0.25, Fp=660*84.3, P=20 kN -> Fb 46.7 kN, Fm 26.7 kN)
+    # ---- bolted joint (C=0.25, Fp=580*84.3, P=20 kN -> Fb 41.7 kN, Fm 21.7 kN)
     "bolted-joints": N("/api/bolted-joints/compute",
-        dict(bolt_stiffness=250000, member_stiffness=750000, proof_load=55638, external_load=20000),
-        ("bolt_load", 46700.0, 2e-3), ("member_load", 26700.0, 3e-3), ("is_separated", False)),
+        dict(bolt_stiffness=250000, member_stiffness=750000, proof_load=48894, external_load=20000),
+        ("bolt_load", 41670.0, 2e-3), ("member_load", 21670.0, 3e-3), ("is_separated", False)),
     # ---- bearing (C=25, P=5 kN, 1800 rpm -> 125 Mrev, 1157 h)
     "bearing-life": N("/api/bearing-selection/compute",
         dict(mode="life", bearing_type="ball", applied_load=5, shaft_speed=1800, dynamic_load_rating=25),
@@ -458,13 +458,13 @@ def test_buckling_worked_example_circular_section():
     assert body["critical_load"] == pytest.approx(67.3, rel=5e-3)
 
 
-@pytest.mark.xfail(strict=True, reason=(
-    "shaft-design worked example (Kf=1.6, Kfs=1.3 -> 30 mm) cannot be expressed: endpoint uses a "
-    "single Kf for bending and torsion and gives 28.4 mm (rounded 29 mm)"))
 def test_shaft_design_worked_example_diameter():
+    """Worked example: Ma=200 N*m, Tm=150 N*m, Se=300, Sut=600 MPa, Kf=1.6, Kfs=1.3, n=2 -> 30.2 mm."""
     path, payload, _ = CASES["shaft-design"]
-    body = client.post(path, json=payload).json()
-    assert body["required_diameter"] == pytest.approx(30.0, rel=0.02)
+    body = client.post(path, json={**payload, "torsion_fatigue_factor": 1.3}).json()
+    assert body["required_diameter"] == pytest.approx(30.17, rel=2e-3)
+    # The engine rounds up to the nearest mm (31 mm, n about 2.17); 30 mm stock would fall just short (n about 1.97).
+    assert (body["rounded_diameter"] == 31.0) and body["rounded_safety_factor"] > 2.0
 
 
 def test_4bar_follower_length_is_preserved():

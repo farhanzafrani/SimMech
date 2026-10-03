@@ -180,6 +180,18 @@ app.include_router(conduction_networks.router)
 app.include_router(fin_heat_transfer.router)
 app.include_router(transient_lumped.router)
 app.include_router(convection_heat_exchangers.router)
+
+# Wave-2 topics: auto-register every router module in routers_wave2/ (see its __init__ docstring)
+import importlib
+import pkgutil
+
+import routers_wave2
+
+for _module in pkgutil.iter_modules(routers_wave2.__path__):
+    _router = getattr(importlib.import_module(f"routers_wave2.{_module.name}"), "router", None)
+    if _router is not None:
+        app.include_router(_router)
+
 app.include_router(catalog.router)
 
 
