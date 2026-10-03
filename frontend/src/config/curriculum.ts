@@ -386,7 +386,7 @@ const BASE_CURRICULUM: CourseMeta[] = [
         ],
         formulas: [
           { label: 'Average (center) stress', formula: 'σ_avg = (σ_x + σ_y) / 2', latex: '\\sigma_{avg} = \\frac{\\sigma_x + \\sigma_y}{2}', note: 'The center of Mohr\u2019s circle on the normal-stress axis.' },
-          { label: "Mohr's circle radius", formula: 'R = √[((σ_x − σ_y)/2)² + τ_xy²]', latex: 'R = \\sqrt{\\left(\\frac{\\sigma_x - \\sigma_y}{2}\\right)^2 + \\tau_{xy}^2}', note: 'The radius of the circle — also the maximum shear stress at any orientation.' },
+          { label: "Mohr's circle radius", formula: 'R = √[((σ_x − σ_y)/2)² + τ_xy²]', latex: 'R = \\sqrt{\\left(\\frac{\\sigma_x - \\sigma_y}{2}\\right)^2 + \\tau_{xy}^2}', note: 'The radius of the circle — also the maximum in-plane shear stress (the absolute maximum also involves σ₃ = 0).' },
           { label: 'Principal stresses', formula: 'σ_1,2 = σ_avg ± R', latex: '\\sigma_{1,2} = \\sigma_{avg} \\pm R', note: 'The two points where the circle crosses the axis where shear is zero.', emphasis: true },
         ],
         workedExample: {
