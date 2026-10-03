@@ -1,0 +1,293 @@
+- generic [ref=f3e3]:
+  - banner [ref=f3e4]:
+    - link "SimMec" [ref=f3e5] [cursor=pointer]:
+      - /url: /courses
+    - navigation [ref=f3e11]:
+      - link "Courses" [ref=f3e12] [cursor=pointer]:
+        - /url: /courses
+    - searchbox "Search topics and formulas" [ref=f3e13]
+  - generic [ref=f3e14]:
+    - navigation [ref=f3e15]:
+      - link "← COURSE Mechanics of Materials" [ref=f3e16] [cursor=pointer]:
+        - /url: /courses/mechanics-of-materials
+        - generic [ref=f3e17]: ← COURSE
+        - generic [ref=f3e18]: Mechanics of Materials
+      - generic [ref=f3e19]:
+        - link "01 Stress-Strain Analysis" [ref=f3e20] [cursor=pointer]:
+          - /url: /courses/mechanics-of-materials/topics/stress-strain
+          - generic [ref=f3e21]:
+            - generic [ref=f3e22]: "01"
+            - generic [ref=f3e23]: Stress-Strain Analysis
+        - generic [ref=f3e24]:
+          - generic [ref=f3e25]:
+            - generic [ref=f3e26]: "02"
+            - generic [ref=f3e27]: Torsion in Circular Shafts
+          - generic [ref=f3e28]:
+            - link "Formulas" [ref=f3e29] [cursor=pointer]:
+              - /url: "#formulas"
+            - link "Visualization" [ref=f3e30] [cursor=pointer]:
+              - /url: "#visualize"
+            - link "Playground" [ref=f3e31] [cursor=pointer]:
+              - /url: "#playground"
+            - link "Practice" [ref=f3e32] [cursor=pointer]:
+              - /url: "#practice"
+    - main [ref=f3e33]:
+      - generic [ref=f3e34]:
+        - navigation "Breadcrumb" [ref=f3e35]:
+          - link "Courses" [ref=f3e36] [cursor=pointer]:
+            - /url: /courses
+          - generic [ref=f3e37]: /
+          - link "Mechanics of Materials" [ref=f3e38] [cursor=pointer]:
+            - /url: /courses/mechanics-of-materials
+          - generic [ref=f3e39]: /
+          - generic [ref=f3e40]: Torsion in Circular Shafts
+        - heading "Torsion in Circular Shafts" [level=1] [ref=f3e41]
+        - generic [ref=f3e42]: Shear stress distribution and angle of twist under torsional loading.
+        - paragraph [ref=f3e43]: Twist a shaft and every fiber inside it shears against its neighbor — most at the surface, not at all at the center. That radial pattern is what makes a solid shaft so efficient at carrying torque, and it is also why the angle of twist and the peak stress obey two different, equally important limits when you size a drive shaft.
+        - generic [ref=f3e44]:
+          - link "1 · Formulas" [ref=f3e45] [cursor=pointer]:
+            - /url: "#formulas"
+          - link "2 · Visualization" [ref=f3e46] [cursor=pointer]:
+            - /url: "#visualize"
+          - link "3 · Playground" [ref=f3e47] [cursor=pointer]:
+            - /url: "#playground"
+      - generic [ref=f3e48]:
+        - generic [ref=f3e49]:
+          - generic [ref=f3e50]: "01"
+          - heading "Formulas" [level=2] [ref=f3e51]
+        - generic [ref=f3e52]:
+          - generic [ref=f3e53]:
+            - generic [ref=f3e54]: Polar moment of inertia
+            - generic [ref=f3e57]:
+              - math [ref=f3e59]:
+                - generic [ref=f3e61]:
+                  - generic [ref=f3e62]: J
+                  - generic [ref=f3e63]: =
+                  - generic [ref=f3e64]:
+                    - generic [ref=f3e65]:
+                      - generic [ref=f3e66]: π
+                      - generic [ref=f3e67]:
+                        - generic [ref=f3e68]: d
+                        - generic [ref=f3e69]: "4"
+                    - generic [ref=f3e70]: "32"
+              - generic [aria-hidden] [ref=f3e71]:
+                - generic [ref=f3e72]: J =
+                - generic [ref=f3e78]:
+                  - generic [ref=f3e79]: "32"
+                  - generic [ref=f3e83]:
+                    - text: π
+                    - generic [ref=f3e84]:
+                      - text: d
+                      - generic [ref=f3e85]: "4"
+            - generic [ref=f3e93]: For a solid circular shaft of diameter d.
+          - generic [ref=f3e94]:
+            - generic [ref=f3e95]: Shear stress at radius r
+            - generic [ref=f3e98]:
+              - math [ref=f3e100]:
+                - generic [ref=f3e102]:
+                  - generic [ref=f3e103]: τ
+                  - generic [ref=f3e104]: (
+                  - generic [ref=f3e105]: r
+                  - generic [ref=f3e106]: )
+                  - generic [ref=f3e107]: =
+                  - generic [ref=f3e108]:
+                    - generic [ref=f3e109]:
+                      - generic [ref=f3e110]: T
+                      - generic [ref=f3e111]: r
+                    - generic [ref=f3e112]: J
+              - generic [aria-hidden] [ref=f3e113]:
+                - generic [ref=f3e114]: τ(r) =
+                - generic [ref=f3e120]:
+                  - generic [ref=f3e121]: J
+                  - generic [ref=f3e124]: Tr
+            - generic [ref=f3e129]: Zero at the center, maximum at the outer surface.
+          - generic [ref=f3e130]:
+            - generic [ref=f3e131]: Maximum shear stress
+            - generic [ref=f3e134]:
+              - math [ref=f3e136]:
+                - generic [ref=f3e138]:
+                  - generic [ref=f3e139]:
+                    - generic [ref=f3e140]: τ
+                    - generic [ref=f3e141]:
+                      - generic [ref=f3e142]: m
+                      - generic [ref=f3e143]: a
+                      - generic [ref=f3e144]: x
+                  - generic [ref=f3e145]: =
+                  - generic [ref=f3e146]:
+                    - generic [ref=f3e147]:
+                      - generic [ref=f3e148]: "16"
+                      - generic [ref=f3e149]: T
+                    - generic [ref=f3e150]:
+                      - generic [ref=f3e151]: π
+                      - generic [ref=f3e152]:
+                        - generic [ref=f3e153]: d
+                        - generic [ref=f3e154]: "3"
+              - generic [aria-hidden] [ref=f3e155]:
+                - generic [ref=f3e156]:
+                  - generic [ref=f3e157]:
+                    - text: τ
+                    - generic [ref=f3e158]: max
+                  - text: =
+                - generic [ref=f3e172]:
+                  - generic [ref=f3e174]:
+                    - text: π
+                    - generic [ref=f3e175]:
+                      - text: d
+                      - generic [ref=f3e176]: "3"
+                  - generic [ref=f3e182]: 16T
+            - generic [ref=f3e187]: At the shaft surface, r = d/2.
+          - generic [ref=f3e188]:
+            - generic [ref=f3e189]: Angle of twist
+            - generic [ref=f3e192]:
+              - math [ref=f3e194]:
+                - generic [ref=f3e196]:
+                  - generic [ref=f3e197]: θ
+                  - generic [ref=f3e198]: =
+                  - generic [ref=f3e199]:
+                    - generic [ref=f3e200]:
+                      - generic [ref=f3e201]: T
+                      - generic [ref=f3e202]: L
+                    - generic [ref=f3e203]:
+                      - generic [ref=f3e204]: G
+                      - generic [ref=f3e205]: J
+              - generic [aria-hidden] [ref=f3e206]:
+                - generic [ref=f3e207]: θ =
+                - generic [ref=f3e213]:
+                  - generic [ref=f3e214]: GJ
+                  - generic [ref=f3e217]: TL
+            - generic [ref=f3e222]: G is the shear modulus; longer or softer shafts twist more.
+          - generic [ref=f3e223]:
+            - generic [ref=f3e224]: Shear yield check (Tresca)
+            - generic [ref=f3e227]:
+              - math [ref=f3e229]:
+                - generic [ref=f3e231]:
+                  - generic [ref=f3e232]:
+                    - generic [ref=f3e233]: τ
+                    - generic [ref=f3e234]:
+                      - generic [ref=f3e235]: "y"
+                      - generic [ref=f3e236]: i
+                      - generic [ref=f3e237]: e
+                      - generic [ref=f3e238]: l
+                      - generic [ref=f3e239]: d
+                  - generic [ref=f3e240]: =
+                  - generic [ref=f3e241]:
+                    - generic [ref=f3e242]:
+                      - generic [ref=f3e243]: σ
+                      - generic [ref=f3e244]:
+                        - generic [ref=f3e245]: "y"
+                        - generic [ref=f3e246]: i
+                        - generic [ref=f3e247]: e
+                        - generic [ref=f3e248]: l
+                        - generic [ref=f3e249]: d
+                    - generic [ref=f3e250]: "2"
+              - generic [aria-hidden] [ref=f3e251]:
+                - generic [ref=f3e252]:
+                  - generic [ref=f3e253]:
+                    - text: τ
+                    - generic [ref=f3e254]: yield
+                  - text: =
+                - generic [ref=f3e268]:
+                  - generic [ref=f3e269]: "2"
+                  - generic [ref=f3e274]:
+                    - text: σ
+                    - generic [ref=f3e275]: yield
+            - generic [ref=f3e287]: Maximum shear stress theory — compare τ_max against this.
+      - generic [ref=f3e288]:
+        - generic [ref=f3e289]:
+          - generic [ref=f3e290]: "02"
+          - heading "Visualization" [level=2] [ref=f3e291]
+        - generic [ref=f3e292]:
+          - figure "Annotated diagram of the setup this topic models." [ref=f3e293]:
+            - img "Circular shaft in torsion diagram" [ref=f3e294]:
+              - generic [ref=f3e308]: T
+              - generic [ref=f3e309]:
+                - generic [ref=f3e313]: Cross-section
+                - generic [ref=f3e314]: τ_max
+                - generic [ref=f3e315]: "0"
+          - figure "A worked-through animation of the same concept in motion." [ref=f3e317]
+      - generic [ref=f3e321]:
+        - generic [ref=f3e322]:
+          - generic [ref=f3e323]:
+            - generic [ref=f3e324]: "03"
+            - heading "Playground" [level=2] [ref=f3e325]
+          - generic [ref=f3e326]: Move the sliders — every diagram and number updates live.
+        - generic [ref=f3e329]:
+          - generic [ref=f3e330]:
+            - generic [ref=f3e331]:
+              - heading "Material Selection" [level=3] [ref=f3e332]
+              - generic [ref=f3e333]:
+                - button "steel" [ref=f3e334] [cursor=pointer]
+                - button "aluminum" [ref=f3e335] [cursor=pointer]
+                - button "copper" [ref=f3e336] [cursor=pointer]
+              - button "Custom" [ref=f3e337] [cursor=pointer]
+            - generic [ref=f3e338]:
+              - generic [ref=f3e339]:
+                - generic [ref=f3e340]:
+                  - generic [ref=f3e341]: Applied Torque T
+                  - generic [ref=f3e342]: 100 N·m
+                - slider [ref=f3e343]: "100"
+              - generic [ref=f3e344]:
+                - generic [ref=f3e345]:
+                  - generic [ref=f3e346]: Shaft Diameter d
+                  - generic [ref=f3e347]: 30 mm
+                - slider [ref=f3e348]: "30"
+              - generic [ref=f3e349]:
+                - generic [ref=f3e350]:
+                  - generic [ref=f3e351]: Shaft Length L
+                  - generic [ref=f3e352]: 1.00 m
+                - slider [ref=f3e353]: "1"
+            - generic [ref=f3e354]:
+              - heading "Material Properties" [level=3] [ref=f3e355]
+              - generic [ref=f3e356]:
+                - generic [ref=f3e357]: Young's Modulus (E)
+                - generic [ref=f3e358]: 210,000 MPa
+              - generic [ref=f3e359]:
+                - generic [ref=f3e360]: Yield Stress (tension)
+                - generic [ref=f3e361]: 250.0 MPa
+              - generic [ref=f3e362]:
+                - generic [ref=f3e363]: Poisson's Ratio (ν)
+                - generic [ref=f3e364]: "0.30"
+            - heading "Results" [level=3] [ref=f3e366]
+            - generic [ref=f3e367]:
+              - heading "Key Equations" [level=3] [ref=f3e368]
+              - generic [ref=f3e369]:
+                - paragraph [ref=f3e370]: J = π d⁴ / 32
+                - paragraph [ref=f3e371]: τ(r) = T r / J
+                - paragraph [ref=f3e372]: θ = T L / (G J)
+                - paragraph [ref=f3e373]: τ_yield = σ_yield / 2
+          - generic [ref=f3e374]:
+            - generic [ref=f3e375]:
+              - heading "Radial Shear Stress τ(r)" [level=3] [ref=f3e376]
+              - img [ref=f3e377]:
+                - generic [ref=f3e380]: "0"
+                - generic [ref=f3e381]: τ_max = 0.0 MPa
+                - generic [ref=f3e382]: at r = d/2
+                - generic [ref=f3e383]: r=0
+                - generic [ref=f3e384]: r=d/2
+            - heading "Shaft Summary" [level=3] [ref=f3e386]
+      - generic [ref=f3e387]:
+        - generic [ref=f3e388]:
+          - generic [ref=f3e389]: "04"
+          - heading "Practice with the playground" [level=2] [ref=f3e390]
+        - generic [ref=f3e391]:
+          - generic [ref=f3e392]:
+            - generic [ref=f3e393]: CHALLENGE 1
+            - generic [ref=f3e394]: Double the shaft diameter with torque and length fixed. τ_max drops by what factor — and does that match 16T/(πd³)?
+          - generic [ref=f3e395]:
+            - generic [ref=f3e396]: CHALLENGE 2
+            - generic [ref=f3e397]: "Switch from steel to aluminum at the same torque and diameter. Which changes more: the stress or the angle of twist — and why does G matter for one but not the other?"
+          - generic [ref=f3e398]:
+            - generic [ref=f3e399]: CHALLENGE 3
+            - generic [ref=f3e400]: Find the diameter at which this shaft just reaches a safety factor of 1.5 against shear yield. Is stress or the angle-of-twist limit more likely to govern first in a real design?
+      - generic [ref=f3e401]:
+        - generic [ref=f3e402]: GO DEEPER
+        - generic [ref=f3e403]:
+          - link "MIT OCW — 2.001 Lecture Notes ↗" [ref=f3e404] [cursor=pointer]:
+            - /url: https://ocw.mit.edu/courses/2-001-mechanics-materials-i-fall-2006/pages/lecture-notes/
+          - link "MIT 3.11 — \"Shear and Torsion\" module notes (Roylance) ↗" [ref=f3e405] [cursor=pointer]:
+            - /url: https://web.mit.edu/course/3/3.11/www/modules/torsion.pdf
+      - navigation "Topic navigation" [ref=f3e406]:
+        - link "← PREVIOUS Stress-Strain Analysis" [ref=f3e407] [cursor=pointer]:
+          - /url: /courses/mechanics-of-materials/topics/stress-strain
+          - generic [ref=f3e408]: ← PREVIOUS
+          - generic [ref=f3e409]: Stress-Strain Analysis

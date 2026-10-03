@@ -13,6 +13,8 @@ dist/
 .env.local
 .env.*.local
 .gstack/
+.playwright-cli/
+python-engine/**/media/
 .DS_Store
 *.swp
 *.swo

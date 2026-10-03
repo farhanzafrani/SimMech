@@ -197,7 +197,7 @@ export default function StressStrainAnalysis() {
               Results
             </h3>
 
-            {loading && (
+            {loading && !data && (
               <div style={{ color: theme.colors.text.secondary, marginBottom: theme.spacing[2] }}>
                 <span className="spinner"></span>
                 Computing...
@@ -208,9 +208,9 @@ export default function StressStrainAnalysis() {
               <div className="error-message">{error}</div>
             )}
 
-            {!loading && data && (
+            {data && (
               <>
-                <div style={{ display: 'grid', gap: theme.spacing[2] }}>
+                <div style={{ display: 'grid', gap: theme.spacing[2], opacity: loading ? 0.6 : 1, transition: 'opacity 150ms ease-in-out' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: theme.spacing[2], borderBottom: `1px solid ${theme.colors.border}` }}>
                     <span>Strain (ε)</span>
                     <span style={{ fontWeight: 600, fontFamily: theme.typography.fontFamily.mono }}>
