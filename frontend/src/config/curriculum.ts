@@ -584,6 +584,7 @@ const BASE_CURRICULUM: CourseMeta[] = [
         description:
           'A power-transmission shaft rarely sees pure torsion — a gear or pulley hung off it adds bending, and the step or keyway needed to seat that gear concentrates the local stress well above the nominal value. The DE-Goodman shaft equation folds all three effects — combined loading, stress concentration, and fatigue-versus-steady stress — into a single formula for the minimum safe diameter.',
         status: 'active',
+        manimSrc: 'animations/shaft-design.mp4',
         realImage: {
           src: 'photos/shaft-design.jpg',
           alt: 'A real propeller shaft and its support bearing',
@@ -685,6 +686,7 @@ const BASE_CURRICULUM: CourseMeta[] = [
         description:
           'A properly preloaded bolt carries far less of an external load than intuition suggests, because tightening it has already stretched the bolt and compressed the clamped plates — both act like stiff springs in a system where most of any new external load goes toward unloading the plates rather than stretching the bolt further. The joint stiffness constant C captures exactly what fraction of the external load the bolt actually feels, and it is usually a surprisingly small number.',
         status: 'active',
+        manimSrc: 'animations/bolted-joints.mp4',
         realImage: {
           src: 'photos/bolted-joints.jpg',
           alt: 'Real bolts clamping a pipe flange joint',
