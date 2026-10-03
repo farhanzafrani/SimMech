@@ -226,6 +226,175 @@ export const CURRICULUM: CourseMeta[] = [
     ],
   },
   {
+    id: 'machine-design',
+    code: '2.72',
+    title: 'Elements of Mechanical Design',
+    symbol: 'n = σ_y / σ′',
+    category: 'Machine elements & design',
+    description: 'How to actually size the parts that make up a machine: shafts, springs, bolts, bearings — combining stress analysis with the reality that most machines fail from fatigue, not overload.',
+    prerequisites: ['Mechanics of Materials', 'Engineering Statics'],
+    references: [
+      { label: 'MIT OCW — 2.72 Elements of Mechanical Design (Spring 2009)', url: 'https://ocw.mit.edu/courses/2-72-elements-of-mechanical-design-spring-2009/' },
+      { label: 'MIT 2.72 — Lecture Notes', url: 'https://ocw.mit.edu/courses/2-72-elements-of-mechanical-design-spring-2009/pages/lecture-notes/' },
+    ],
+    topics: [
+      {
+        id: 'failure-theories',
+        title: 'Failure Theories: Von Mises & Tresca',
+        duration: '16m',
+        summary: 'Distortion-energy and maximum-shear-stress theories for predicting yielding under combined stress.',
+        description:
+          'A single normal stress has an obvious yield point: compare it to σ_y and you’re done. A real part under combined bending, torsion, and pressure has no single stress to compare — it has a whole state of stress at a point, the same principal stresses read off Mohr’s circle. Von Mises and Tresca are two different, both widely used, rules for collapsing that multi-axis stress state back down to one number you can compare against a simple uniaxial yield test.',
+        status: 'active',
+        formulas: [
+          { label: 'Von Mises effective stress (plane stress)', formula: "σ' = √(σ1² − σ1σ2 + σ2²)", latex: "\\sigma' = \\sqrt{\\sigma_1^2 - \\sigma_1\\sigma_2 + \\sigma_2^2}", note: 'Collapses the two principal stresses into one equivalent uniaxial stress.', emphasis: true },
+          { label: 'Tresca (max shear stress) criterion', formula: 'σ1 − σ3 = σ_y / n', latex: '\\sigma_1 - \\sigma_3 = \\frac{\\sigma_y}{n}', note: 'Uses only the largest and smallest principal stress — always at least as conservative as von Mises.' },
+          { label: 'Factor of safety (von Mises)', formula: "n = σ_y / σ'", latex: "n = \\frac{\\sigma_y}{\\sigma'}", note: 'Ratio of the material’s yield strength to the computed effective stress.' },
+        ],
+        challenges: [
+          'Set up a pure-shear stress state (σ_x=0, σ_y=0, τ_xy≠0). Where do von Mises and Tresca disagree the most, and by roughly what percentage?',
+          'Increase τ_xy until von Mises just predicts yield. Has Tresca already predicted yield at a lower τ_xy, or exactly the same one?',
+        ],
+        references: [],
+      },
+      {
+        id: 'fatigue-analysis',
+        title: 'Fatigue Analysis: S-N Curves & the Goodman Diagram',
+        duration: '17m',
+        summary: 'Predict fatigue life and the infinite-life safety factor for a part under fluctuating stress.',
+        description:
+          'A load well below the yield stress can still break a part — if it’s applied and removed enough times. The S-N curve captures how many cycles a material survives at a given fully-reversed stress amplitude, and the Goodman diagram extends that picture to loads that fluctuate around a nonzero mean, drawing the line between "survives forever" and "fails eventually" as a function of both the swing and the offset of the stress.',
+        status: 'active',
+        formulas: [
+          { label: "Basquin's equation (finite life)", formula: "σ_a = σ_f' (2N)^b", latex: "\\sigma_a = \\sigma_f' (2N)^b", note: 'Amplitude-life relationship in the finite-life region; N is cycles to failure.' },
+          { label: 'Endurance limit (unmodified, steel)', formula: 'S_e′ ≈ 0.5 S_ut', latex: "S_e' \\approx 0.5\\,S_{ut}", note: 'Roughly half the ultimate strength for many steels; corrected by surface/size/loading factors for a real S_e.' },
+          { label: 'Modified Goodman line', formula: 'σ_a/S_e + σ_m/S_ut = 1/n', latex: '\\frac{\\sigma_a}{S_e} + \\frac{\\sigma_m}{S_{ut}} = \\frac{1}{n}', note: 'The safe region is everything inside this line; n is the factor of safety against fatigue failure at that load ratio.', emphasis: true },
+        ],
+        challenges: [
+          'Hold the stress amplitude fixed and increase the mean stress. Does the Goodman line say the part is more or less likely to fail — and does that match your intuition about a bolt that’s always partly loaded?',
+          'Set the mean stress to zero (fully reversed loading). What does the Goodman equation reduce to, and how does that connect back to the S-N curve alone?',
+        ],
+        references: [],
+      },
+      {
+        id: 'shaft-design',
+        title: 'Shaft Design Under Combined Bending and Torsion',
+        duration: '18m',
+        summary: 'Size a rotating shaft for combined bending-and-torsion fatigue loading, including stress concentration at a fillet.',
+        description:
+          'A power-transmission shaft rarely sees pure torsion — a gear or pulley hung off it adds bending, and the step or keyway needed to seat that gear concentrates the local stress well above the nominal value. The ASME shaft-design equation folds all three effects — combined loading, stress concentration, and fatigue-versus-steady stress — into a single formula for the minimum safe diameter.',
+        status: 'active',
+        formulas: [
+          { label: 'ASME shaft diameter (DE-Goodman)', formula: 'd³ = (32n/π)·√[(K_f M_a/S_e)² + (3/4)(K_fs T_m/S_ut)²]', latex: 'd^3 = \\frac{32n}{\\pi}\\sqrt{\\left(\\frac{K_f M_a}{S_e}\\right)^2 + \\frac{3}{4}\\left(\\frac{K_{fs} T_m}{S_{ut}}\\right)^2}', note: 'The standard combined bending-fatigue / torsion-steady sizing equation; M_a is alternating bending moment, T_m is steady torque.', emphasis: true },
+          { label: 'Fatigue stress-concentration factor', formula: 'K_f = 1 + q(K_t − 1)', latex: 'K_f = 1 + q(K_t - 1)', note: 'q is the notch sensitivity (0 to 1); a sharper fillet raises K_t but a more notch-sensitive material turns more of that into real fatigue damage.' },
+          { label: 'Alternating von Mises stress at the fillet', formula: "σ_a' = K_f · 32 M_a / (π d³)", latex: "\\sigma_a' = K_f \\frac{32 M_a}{\\pi d^3}", note: 'The actual local stress the S-N curve / Goodman line needs to be checked against.' },
+        ],
+        challenges: [
+          'Sharpen the fillet radius at the shoulder (increase K_t). What happens to the required shaft diameter, even though the nominal bending stress hasn’t changed at all?',
+          'Remove the bending load entirely, leaving only steady torque. Does the ASME equation still need its fatigue term, or does it collapse into a static-strength check?',
+        ],
+        references: [
+          { label: 'MIT 2.72 — Lecture 02: Shafts (Culpepper)', url: 'https://ocw.mit.edu/courses/2-72-elements-of-mechanical-design-spring-2009/130ca461b0fdb9b90a8818fe97d022f9_MIT2_72s09_lec02_shaft.pdf' },
+        ],
+      },
+      {
+        id: 'spring-design',
+        title: 'Helical Compression Spring Design',
+        duration: '16m',
+        summary: 'Spring rate, coil shear stress, and the Wahl correction factor for a round-wire helical compression spring.',
+        description:
+          'A helical spring is really a torsion bar wound into a coil — every cross-section of the wire is being twisted, not bent, which is why the spring rate depends on the fourth power of wire diameter but only the inverse cube of coil diameter. The plain shear-stress formula for a straight torsion bar under-predicts the real peak stress in a coil, because the wire curves back on itself and the load line is offset from the wire’s centroid; the Wahl factor corrects for both effects at once.',
+        status: 'active',
+        formulas: [
+          { label: 'Spring rate', formula: 'k = G d⁴ / (8 D³ N)', latex: 'k = \\frac{G d^4}{8 D^3 N}', note: 'd = wire diameter, D = mean coil diameter, N = active coils, G = shear modulus.', emphasis: true },
+          { label: 'Spring index', formula: 'C = D / d', latex: 'C = \\frac{D}{d}', note: 'Practical springs run C between about 4 and 12 — too low and the wire is hard to coil, too high and the spring is floppy and prone to buckling.' },
+          { label: 'Wahl correction factor', formula: 'K_w = (4C−1)/(4C−4) + 0.615/C', latex: 'K_w = \\frac{4C-1}{4C-4} + \\frac{0.615}{C}', note: 'Corrects for direct shear and coil curvature; approaches 1 as the spring index grows large.' },
+          { label: 'Corrected shear stress', formula: 'τ = K_w · 8 F D / (π d³)', latex: '\\tau = K_w \\frac{8FD}{\\pi d^3}', note: 'The real peak shear stress in the wire under axial force F.' },
+        ],
+        challenges: [
+          'Hold the wire diameter fixed and shrink the coil diameter to push the spring index down toward 4. What happens to the Wahl factor, and to the actual stress at a given load?',
+          'Double the number of active coils with everything else fixed. What happens to the spring rate — and does the stress in the wire change at all for the same applied force?',
+        ],
+        references: [],
+      },
+      {
+        id: 'bolted-joints',
+        title: 'Bolted Joint Design & Preload',
+        duration: '17m',
+        summary: 'Joint stiffness, bolt preload, and how an external tensile load actually splits between the bolt and the clamped members.',
+        description:
+          'A properly preloaded bolt carries far less of an external load than intuition suggests, because tightening it has already stretched the bolt and compressed the clamped plates — both act like stiff springs in a system where most of any new external load goes toward unloading the plates rather than stretching the bolt further. The joint stiffness constant C captures exactly what fraction of the external load the bolt actually feels, and it is usually a surprisingly small number.',
+        status: 'active',
+        formulas: [
+          { label: 'Joint stiffness constant', formula: 'C = k_b / (k_b + k_m)', latex: 'C = \\frac{k_b}{k_b + k_m}', note: 'k_b = bolt stiffness, k_m = clamped-member stiffness; C is typically 0.2–0.3 for standard steel joints — the members are much stiffer than the bolt.' },
+          { label: 'Resultant bolt load', formula: 'F_b = F_i + C·P', latex: 'F_b = F_i + C P', note: 'F_i is the preload, P is the external tensile load applied to the joint.', emphasis: true },
+          { label: 'Resultant clamp (member) load', formula: 'F_m = F_i − (1−C)·P', latex: 'F_m = F_i - (1-C)P', note: 'The joint separates once F_m reaches zero — that sets the maximum allowed external load.' },
+          { label: 'Recommended preload (reused fastener)', formula: 'F_i = 0.75 F_p', latex: 'F_i = 0.75\\,F_p', note: 'F_p is the proof load of the bolt (proof strength × tensile stress area).' },
+        ],
+        challenges: [
+          'Increase the external load P until F_m from the formula above reaches zero. What has physically happened to the joint at that point?',
+          'Compare a joint with C=0.2 to one with C=0.8 under the same P and preload. Which bolt sees more load — and which joint would you trust more for a fatigue-critical application?',
+        ],
+        references: [],
+      },
+      {
+        id: 'bearing-selection',
+        title: 'Rolling-Element Bearing Selection: L10 Life',
+        duration: '15m',
+        summary: 'Predict the statistical fatigue life of a ball or roller bearing from its dynamic load rating and the actual applied load.',
+        description:
+          'No two identical bearings fail at exactly the same number of cycles — rolling-contact fatigue is inherently statistical. The L10 life is the number of revolutions 90% of a batch of identical bearings are expected to survive before the first sign of fatigue, and it is set entirely by the ratio of the manufacturer’s catalog dynamic load rating to the actual load the bearing carries, raised to a power that depends on whether the rolling elements are balls or rollers.',
+        status: 'active',
+        formulas: [
+          { label: 'L10 life (millions of revolutions)', formula: 'L10 = (C / P)^k', latex: 'L_{10} = \\left(\\frac{C}{P}\\right)^{k}', note: 'C = dynamic load rating, P = equivalent applied load, k = 3 for ball bearings, 10/3 for roller bearings.', emphasis: true },
+          { label: 'Life in operating hours', formula: 'L10h = L10 · 10⁶ / (60 n)', latex: 'L_{10h} = \\frac{L_{10}\\times10^6}{60\\,n}', note: 'n = shaft speed in rpm.' },
+        ],
+        challenges: [
+          'Double the applied load P with everything else fixed. By what factor does the L10 life drop for a ball bearing — and is that factor different for a roller bearing?',
+          'A bearing rated for a 5-year life at its expected load turns out to see a 20% higher load in service. Roughly how much life is actually lost?',
+        ],
+        references: [],
+      },
+      {
+        id: 'gear-tooth-bending',
+        title: 'Spur Gear Tooth Bending Stress (Lewis Equation)',
+        duration: '18m',
+        summary: 'How gear tooth geometry and tangential tooth load set the bending stress at the tooth root.',
+        description:
+          'A gear tooth is a stubby cantilever beam, loaded near its tip by the mating tooth — so the same flexure formula from beam bending applies, just packaged for gear geometry through the Lewis form factor. Add the fact that only one tooth (or briefly two) actually carries the full load at any instant, and gear design becomes a beam-bending problem wearing a different notation.',
+        status: 'coming-soon',
+        formulas: [
+          { label: 'Lewis bending stress', formula: 'σ = W^t P_d / (F Y)', latex: '\\sigma = \\frac{W^t P_d}{F Y}', note: 'W^t = tangential tooth load, P_d = diametral pitch, F = face width, Y = Lewis form factor (depends on tooth count).', emphasis: true },
+          { label: 'Tangential tooth load from transmitted power', formula: 'W^t = 2T / d_p', latex: 'W^t = \\frac{2T}{d_p}', note: 'T = transmitted torque, d_p = pitch diameter.' },
+        ],
+        challenges: [
+          'Cut the number of teeth on a gear in half while keeping the pitch diameter fixed (coarsening the pitch). What happens to the Lewis form factor Y, and why does that make the teeth stronger?',
+          'Double the transmitted torque at a fixed pitch diameter. By what factor does the tooth-root bending stress increase?',
+        ],
+        references: [],
+      },
+      {
+        id: 'belt-chain-drives',
+        title: 'Belt & Chain Drives',
+        duration: '15m',
+        summary: 'Speed ratio and the belt tension ratio that sets how much power a flat or V-belt can actually transmit before it slips.',
+        description:
+          'A belt drive transmits power entirely through friction between the belt and the pulley, which means there is a hard limit on how much tension difference the belt can sustain before it slips — set by the coefficient of friction and how far the belt wraps around the pulley. Push past that limit and adding more motor torque does nothing except make the belt slip faster.',
+        status: 'coming-soon',
+        formulas: [
+          { label: 'Speed ratio', formula: 'N2 / N1 = d1 / d2', latex: '\\frac{N_2}{N_1} = \\frac{d_1}{d_2}', note: 'Output speed set purely by the ratio of pulley diameters, same as gears.' },
+          { label: 'Belt tension ratio (capstan equation)', formula: 'T1 / T2 = e^(μθ)', latex: '\\frac{T_1}{T_2} = e^{\\mu\\theta}', note: 'μ = friction coefficient, θ = wrap angle in radians; the maximum tension ratio before slipping.', emphasis: true },
+          { label: 'Power transmitted', formula: 'P = (T1 − T2)·v', latex: 'P = (T_1 - T_2)v', note: 'v = belt speed; only the difference in tension does useful work, the rest is just belt preload.' },
+        ],
+        challenges: [
+          'Shrink the wrap angle by moving the pulleys further apart (or using a smaller pulley). Does the belt’s power capacity go up or down before it slips?',
+          'Double the friction coefficient (switch to a higher-grip belt material). By what factor does the maximum tension ratio change?',
+        ],
+        references: [],
+      },
+    ],
+  },
+  {
     id: 'engineering-dynamics',
     code: '2.003',
     title: 'Engineering Dynamics',

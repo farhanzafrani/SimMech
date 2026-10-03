@@ -1,0 +1,232 @@
+- generic [ref=f4e3]:
+  - banner [ref=f4e4]:
+    - link "SimMec" [ref=f4e5] [cursor=pointer]:
+      - /url: /courses
+    - navigation [ref=f4e11]:
+      - link "Courses" [ref=f4e12] [cursor=pointer]:
+        - /url: /courses
+    - searchbox "Search topics and formulas" [ref=f4e13]
+  - generic [ref=f4e14]:
+    - navigation [ref=f4e15]:
+      - link "← COURSE Mechanics of Materials" [ref=f4e16] [cursor=pointer]:
+        - /url: /courses/mechanics-of-materials
+        - generic [ref=f4e17]: ← COURSE
+        - generic [ref=f4e18]: Mechanics of Materials
+      - generic [ref=f4e19]:
+        - generic [ref=f4e20]:
+          - generic [ref=f4e21]:
+            - generic [ref=f4e22]: "01"
+            - generic [ref=f4e23]: Stress-Strain Analysis
+          - generic [ref=f4e24]:
+            - link "Formulas" [ref=f4e25] [cursor=pointer]:
+              - /url: "#formulas"
+            - link "Visualization" [ref=f4e26] [cursor=pointer]:
+              - /url: "#visualize"
+            - link "Playground" [ref=f4e27] [cursor=pointer]:
+              - /url: "#playground"
+            - link "Practice" [ref=f4e28] [cursor=pointer]:
+              - /url: "#practice"
+        - link "02 Torsion in Circular Shafts" [ref=f4e29] [cursor=pointer]:
+          - /url: /courses/mechanics-of-materials/topics/torsion
+          - generic [ref=f4e30]:
+            - generic [ref=f4e31]: "02"
+            - generic [ref=f4e32]: Torsion in Circular Shafts
+    - main [ref=f4e33]:
+      - generic [ref=f4e34]:
+        - navigation "Breadcrumb" [ref=f4e35]:
+          - link "Courses" [ref=f4e36] [cursor=pointer]:
+            - /url: /courses
+          - generic [ref=f4e37]: /
+          - link "Mechanics of Materials" [ref=f4e38] [cursor=pointer]:
+            - /url: /courses/mechanics-of-materials
+          - generic [ref=f4e39]: /
+          - generic [ref=f4e40]: Stress-Strain Analysis
+        - heading "Stress-Strain Analysis" [level=1] [ref=f4e41]
+        - generic [ref=f4e42]: Explore how materials deform under stress and understand elastic vs. plastic behavior.
+        - paragraph [ref=f4e43]: A bar pulled in tension stretches. Below the yield point it springs back to its original length; push past yield and the stretch becomes permanent. The stress-strain curve is how engineers read a material’s whole personality — stiffness, strength, and ductility — off a single test.
+        - generic [ref=f4e44]:
+          - link "1 · Formulas" [ref=f4e45] [cursor=pointer]:
+            - /url: "#formulas"
+          - link "2 · Visualization" [ref=f4e46] [cursor=pointer]:
+            - /url: "#visualize"
+          - link "3 · Playground" [ref=f4e47] [cursor=pointer]:
+            - /url: "#playground"
+      - generic [ref=f4e48]:
+        - generic [ref=f4e49]:
+          - generic [ref=f4e50]: "01"
+          - heading "Formulas" [level=2] [ref=f4e51]
+        - generic [ref=f4e52]:
+          - generic [ref=f4e53]:
+            - generic [ref=f4e54]: Normal stress
+            - generic [ref=f4e57]:
+              - math [ref=f4e59]:
+                - generic [ref=f4e61]:
+                  - generic [ref=f4e62]: σ
+                  - generic [ref=f4e63]: =
+                  - generic [ref=f4e64]:
+                    - generic [ref=f4e65]: F
+                    - generic [ref=f4e66]: A
+              - generic [aria-hidden] [ref=f4e67]:
+                - generic [ref=f4e68]: σ =
+                - generic [ref=f4e74]:
+                  - generic [ref=f4e75]: A
+                  - generic [ref=f4e78]: F
+            - generic [ref=f4e83]: Force distributed over the cross-sectional area.
+          - generic [ref=f4e84]:
+            - generic [ref=f4e85]: Engineering strain
+            - generic [ref=f4e88]:
+              - math [ref=f4e90]:
+                - generic [ref=f4e92]:
+                  - generic [ref=f4e93]: ε
+                  - generic [ref=f4e94]: =
+                  - generic [ref=f4e95]:
+                    - generic [ref=f4e96]:
+                      - generic [ref=f4e97]: Δ
+                      - generic [ref=f4e98]: L
+                    - generic [ref=f4e99]:
+                      - generic [ref=f4e100]: L
+                      - generic [ref=f4e101]: "0"
+              - generic [aria-hidden] [ref=f4e102]:
+                - generic [ref=f4e103]: ε =
+                - generic [ref=f4e109]:
+                  - generic [ref=f4e112]:
+                    - text: L
+                    - generic [ref=f4e113]: "0"
+                  - generic [ref=f4e122]: ΔL
+            - generic [ref=f4e127]: Fractional change in length under load.
+          - generic [ref=f4e128]:
+            - generic [ref=f4e129]: Young's modulus
+            - generic [ref=f4e132]:
+              - math [ref=f4e134]:
+                - generic [ref=f4e136]:
+                  - generic [ref=f4e137]: E
+                  - generic [ref=f4e138]: =
+                  - generic [ref=f4e139]:
+                    - generic [ref=f4e140]: σ
+                    - generic [ref=f4e141]: ε
+              - generic [aria-hidden] [ref=f4e142]:
+                - generic [ref=f4e143]: E =
+                - generic [ref=f4e149]:
+                  - generic [ref=f4e150]: ε
+                  - generic [ref=f4e153]: σ
+            - generic [ref=f4e158]: Slope of the elastic (linear) region — stiffness.
+          - generic [ref=f4e159]:
+            - generic [ref=f4e160]: Poisson's ratio
+            - generic [ref=f4e163]:
+              - math [ref=f4e165]:
+                - generic [ref=f4e167]:
+                  - generic [ref=f4e168]: ν
+                  - generic [ref=f4e169]: =
+                  - generic [ref=f4e170]: −
+                  - generic [ref=f4e171]:
+                    - generic [ref=f4e172]:
+                      - generic [ref=f4e173]: ε
+                      - generic [ref=f4e174]:
+                        - generic [ref=f4e175]: l
+                        - generic [ref=f4e176]: a
+                        - generic [ref=f4e177]: t
+                        - generic [ref=f4e178]: e
+                        - generic [ref=f4e179]: r
+                        - generic [ref=f4e180]: a
+                        - generic [ref=f4e181]: l
+                    - generic [ref=f4e182]:
+                      - generic [ref=f4e183]: ε
+                      - generic [ref=f4e184]:
+                        - generic [ref=f4e185]: a
+                        - generic [ref=f4e186]: x
+                        - generic [ref=f4e187]: i
+                        - generic [ref=f4e188]: a
+                        - generic [ref=f4e189]: l
+              - generic [aria-hidden] [ref=f4e190]:
+                - generic [ref=f4e191]: ν =
+                - generic [ref=f4e192]:
+                  - text: −
+                  - generic [ref=f4e197]:
+                    - generic [ref=f4e200]:
+                      - text: ε
+                      - generic [ref=f4e201]: axial
+                    - generic [ref=f4e213]:
+                      - text: ε
+                      - generic [ref=f4e214]: lateral
+            - generic [ref=f4e226]: How much a material thins as it stretches.
+      - generic [ref=f4e227]:
+        - generic [ref=f4e228]:
+          - generic [ref=f4e229]: "02"
+          - heading "Visualization" [level=2] [ref=f4e230]
+        - generic [ref=f4e231]:
+          - figure "Annotated diagram of the setup this topic models." [ref=f4e232]:
+            - img "Rod under axial tension diagram" [ref=f4e233]:
+              - generic [ref=f4e242]: F
+              - generic [ref=f4e243]: L₀
+              - generic [ref=f4e244]: L = L₀ + ΔL
+              - generic [ref=f4e245]: Area A
+          - figure "A worked-through animation of the same concept in motion." [ref=f4e247]
+      - generic [ref=f4e251]:
+        - generic [ref=f4e252]:
+          - generic [ref=f4e253]:
+            - generic [ref=f4e254]: "03"
+            - heading "Playground" [level=2] [ref=f4e255]
+          - generic [ref=f4e256]: Move the sliders — every diagram and number updates live.
+        - generic [ref=f4e258]:
+          - generic [ref=f4e259]:
+            - heading "Stress-Strain Analysis" [level=1] [ref=f4e260]
+            - paragraph [ref=f4e261]: Explore how materials deform under stress and understand elastic vs. plastic behavior
+          - generic [ref=f4e262]:
+            - generic [ref=f4e263]:
+              - generic [ref=f4e264]:
+                - heading "Material Selection" [level=3] [ref=f4e265]
+                - generic [ref=f4e266]:
+                  - button "steel" [ref=f4e267] [cursor=pointer]
+                  - button "aluminum" [ref=f4e268] [cursor=pointer]
+                  - button "copper" [ref=f4e269] [cursor=pointer]
+                - button "Custom" [ref=f4e270] [cursor=pointer]
+              - generic [ref=f4e271]:
+                - generic [ref=f4e273]:
+                  - generic [ref=f4e274]: Applied Stress
+                  - generic [ref=f4e275]: 150.0 MPa
+                - slider [ref=f4e276]: "150"
+              - generic [ref=f4e277]:
+                - heading "Material Properties" [level=3] [ref=f4e278]
+                - generic [ref=f4e279]:
+                  - generic [ref=f4e280]: Young's Modulus (E)
+                  - generic [ref=f4e281]: 210,000 MPa
+                - generic [ref=f4e282]:
+                  - generic [ref=f4e283]: Yield Stress
+                  - generic [ref=f4e284]: 250.0 MPa
+                - generic [ref=f4e285]:
+                  - generic [ref=f4e286]: Poisson's Ratio (ν)
+                  - generic [ref=f4e287]: "0.30"
+              - heading "Results" [level=3] [ref=f4e289]
+              - generic [ref=f4e290]:
+                - heading "Key Equations" [level=3] [ref=f4e291]
+                - generic [ref=f4e292]:
+                  - paragraph [ref=f4e293]: σ = F/A (Stress)
+                  - paragraph [ref=f4e294]: ε = ΔL/L₀ (Strain)
+                  - paragraph [ref=f4e295]: E = σ/ε (Young's Modulus)
+                  - paragraph [ref=f4e296]: ν = -ε_lateral/ε_axial (Poisson's Ratio)
+            - generic [ref=f4e297]:
+              - generic [ref=f4e298]:
+                - heading "Stress-Strain Curve" [level=3] [ref=f4e299]
+                - img [ref=f4e300]:
+                  - generic [ref=f4e301]: Strain
+                  - generic [ref=f4e302]: Stress (MPa)
+              - heading "3D Cube Deformation" [level=3] [ref=f4e304]
+      - generic [ref=f4e305]:
+        - generic [ref=f4e306]:
+          - generic [ref=f4e307]: "04"
+          - heading "Practice with the playground" [level=2] [ref=f4e308]
+        - generic [ref=f4e309]:
+          - generic [ref=f4e310]:
+            - generic [ref=f4e311]: CHALLENGE 1
+            - generic [ref=f4e312]: At what applied stress does steel first leave the elastic region in this playground? Compare it to the yield stress you set.
+          - generic [ref=f4e313]:
+            - generic [ref=f4e314]: CHALLENGE 2
+            - generic [ref=f4e315]: Switch to aluminum. For the same applied stress, how much more strain do you get than with steel — and why does that follow from E?
+          - generic [ref=f4e316]:
+            - generic [ref=f4e317]: CHALLENGE 3
+            - generic [ref=f4e318]: Push a custom material well past its ultimate stress. What does "fracture" mean physically at that point?
+      - navigation "Topic navigation" [ref=f4e319]:
+        - link "NEXT → Torsion in Circular Shafts" [ref=f4e321] [cursor=pointer]:
+          - /url: /courses/mechanics-of-materials/topics/torsion
+          - generic [ref=f4e322]: NEXT →
+          - generic [ref=f4e323]: Torsion in Circular Shafts
