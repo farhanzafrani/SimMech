@@ -48,6 +48,11 @@ import { SLICE_REGISTRY as REG_3 } from './slices/robotics.registry'
 import { SLICE_REGISTRY as REG_4 } from './slices/materials-mfg.registry'
 import { SLICE_REGISTRY as REG_5 } from './slices/thermal.registry'
 
+const WAVE2_REGISTRIES = import.meta.glob<{ SLICE_REGISTRY: Record<string, { Concept: ComponentType; Playground: ComponentType }> }>(
+  './slices/wave2/*.registry.tsx',
+  { eager: true },
+)
+
 interface TopicImplementation {
   Concept: ComponentType
   Playground: ComponentType
@@ -144,4 +149,6 @@ export const TOPIC_REGISTRY: Record<string, TopicImplementation> = {
   ...REG_3,
   ...REG_4,
   ...REG_5,
+  // Wave-2: any slices/wave2/*.registry.tsx exporting SLICE_REGISTRY is merged in.
+  ...Object.assign({}, ...Object.values(WAVE2_REGISTRIES).map((m) => m.SLICE_REGISTRY)),
 }

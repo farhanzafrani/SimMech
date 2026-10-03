@@ -1179,19 +1179,25 @@ const BASE_CURRICULUM: CourseMeta[] = [
   },
 ]
 
-const SLICE_NEW_COURSES: CourseMeta[] = [...NEW_0, ...NEW_1, ...NEW_2, ...NEW_3, ...NEW_4, ...NEW_5]
-const SLICE_EXTRA_TOPICS: { courseId: string; topics: TopicMeta[] }[] = [...EXTRA_0, ...EXTRA_1, ...EXTRA_2, ...EXTRA_3, ...EXTRA_4, ...EXTRA_5]
+// Wave-2 slices are auto-discovered: any frontend/src/config/slices/wave2/*.ts that exports NEW_COURSES and/or EXTRA_TOPICS is merged in.
+type SliceModule = { NEW_COURSES?: CourseMeta[]; EXTRA_TOPICS?: { courseId: string; topics: TopicMeta[] }[] }
+const WAVE2 = Object.entries(import.meta.glob<SliceModule>('./slices/wave2/*.ts', { eager: true }))
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([, mod]) => mod)
+
+const SLICE_NEW_COURSES: CourseMeta[] = [...NEW_0, ...NEW_1, ...NEW_2, ...NEW_3, ...NEW_4, ...NEW_5, ...WAVE2.flatMap((m) => m.NEW_COURSES ?? [])]
+const SLICE_EXTRA_TOPICS: { courseId: string; topics: TopicMeta[] }[] = [
+  ...EXTRA_0, ...EXTRA_1, ...EXTRA_2, ...EXTRA_3, ...EXTRA_4, ...EXTRA_5,
+  ...WAVE2.flatMap((m) => m.EXTRA_TOPICS ?? []),
+]
 
 /** Base courses, with slice topics appended (replacing same-id stubs) and slice courses added. */
-export const CURRICULUM: CourseMeta[] = [
-  ...BASE_CURRICULUM.map((course) => {
+export const CURRICULUM: CourseMeta[] = [...BASE_CURRICULUM, ...SLICE_NEW_COURSES].map((course) => {
     const extra = SLICE_EXTRA_TOPICS.filter((e) => e.courseId === course.id).flatMap((e) => e.topics)
     if (extra.length === 0) return course
     const base = course.topics.map((t) => extra.find((x) => x.id === t.id) ?? t)
     return { ...course, topics: [...base, ...extra.filter((t) => !course.topics.some((b) => b.id === t.id))] }
-  }),
-  ...SLICE_NEW_COURSES,
-]
+})
 
 export function findTopic(courseId: string, topicId: string) {
   const course = CURRICULUM.find((c) => c.id === courseId)
