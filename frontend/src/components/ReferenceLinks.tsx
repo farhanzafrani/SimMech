@@ -12,10 +12,16 @@ export default function ReferenceLinks({ title, references }: ReferenceLinksProp
 
   return (
     <div
-      className="card"
-      style={{ padding: theme.spacing[4], display: 'flex', flexDirection: 'column', gap: theme.spacing[3] }}
+      style={{
+        padding: theme.spacing[5],
+        display: 'flex',
+        flexDirection: 'column',
+        gap: theme.spacing[3],
+        borderRadius: theme.radius.xl,
+        backgroundColor: theme.colors.bg.secondary,
+      }}
     >
-      <div style={{ fontFamily: theme.typography.fontFamily.mono, fontSize: '12px', letterSpacing: '0.06em', color: theme.colors.text.light }}>
+      <div style={{ fontSize: '12px', fontWeight: 700, letterSpacing: '0.06em', color: theme.colors.text.light }}>
         {title.toUpperCase()}
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: theme.spacing[2] }}>
@@ -25,9 +31,20 @@ export default function ReferenceLinks({ title, references }: ReferenceLinksProp
             href={ref.url}
             target="_blank"
             rel="noopener noreferrer"
-            style={{ fontSize: '14px', fontWeight: 600, color: theme.colors.accent[600] }}
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              gap: theme.spacing[3],
+              padding: '10px 14px',
+              borderRadius: theme.radius.md,
+              backgroundColor: '#FFFFFF',
+              fontSize: '14px',
+              fontWeight: 600,
+              color: theme.colors.text.primary,
+            }}
           >
-            {ref.label} ↗
+            <span>{ref.label}</span>
+            <span style={{ color: theme.colors.accent[500] }}>↗</span>
           </a>
         ))}
       </div>

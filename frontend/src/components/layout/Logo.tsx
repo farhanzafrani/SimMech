@@ -1,13 +1,28 @@
 import { theme } from '../../styles/theme'
 
-export default function Logo() {
+/** Free Body mark: a supported beam with a downward load arrow, on a cobalt tile. */
+export default function Logo({ size = 40 }: { size?: number }) {
   return (
-    <svg width="28" height="28" viewBox="0 0 30 30" fill="none" stroke={theme.colors.text.primary} strokeWidth="2">
-      <line x1="3" y1="18" x2="27" y2="18" />
-      <path d="M6 18 L3 24 L9 24 Z" />
-      <path d="M24 18 L21 24 L27 24 Z" />
-      <line x1="15" y1="3" x2="15" y2="14" stroke={theme.colors.accent[500]} />
-      <path d="M11 10 L15 15 L19 10" stroke={theme.colors.accent[500]} />
-    </svg>
+    <span
+      aria-hidden
+      style={{
+        width: `${size}px`,
+        height: `${size}px`,
+        flexShrink: 0,
+        borderRadius: `${Math.round(size * 0.3)}px`,
+        background: theme.colors.lightBlue[500],
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <svg width={size * 0.6} height={size * 0.6} viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.4" strokeLinecap="round">
+        <path d="M3 15 H21" />
+        <path d="M5 15 L3 20 H8 Z" />
+        <path d="M19 15 L16 20 H21 Z" />
+        <path d="M12 3 V11" stroke={theme.colors.accent.light} />
+        <path d="M9 8 L12 11 L15 8" stroke={theme.colors.accent.light} />
+      </svg>
+    </span>
   )
 }

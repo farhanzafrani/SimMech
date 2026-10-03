@@ -1,61 +1,84 @@
-import { Link, Outlet } from 'react-router-dom'
+import { Link, NavLink, Outlet, useLocation, useMatch } from 'react-router-dom'
+import { useEffect } from 'react'
 import Logo from './Logo'
 import { theme } from '../../styles/theme'
 
 export default function AppShell() {
+  const { pathname, hash } = useLocation()
+  // Lesson pages carry their own header (back link, unit nav, next lesson).
+  const isLesson = Boolean(useMatch('/courses/:courseId/topics/:topicId'))
+
+  // Land at the top of each new page; honour in-page anchors (#playground …) when present.
+  useEffect(() => {
+    if (hash) {
+      document.getElementById(hash.slice(1))?.scrollIntoView()
+    } else {
+      window.scrollTo(0, 0)
+    }
+  }, [pathname, hash])
+
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: theme.colors.bg.secondary }}>
-      <header
-        style={{
-          height: '72px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: theme.spacing[10],
-          padding: `0 ${theme.spacing[8]}`,
-          backgroundColor: theme.colors.bg.primary,
-          borderBottom: `1px solid ${theme.colors.border}`,
-        }}
-      >
-        <Link to="/courses" style={{ display: 'flex', alignItems: 'center', gap: theme.spacing[2], textDecoration: 'none' }}>
-          <Logo />
-          <span
+    <div className="app-frame">
+      <div className="app-panel">
+        {!isLesson && (
+        <header style={{ minHeight: '64px', display: 'flex', alignItems: 'center', gap: theme.spacing[6], padding: '0 8px' }}>
+          <Link to="/courses" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <Logo />
+            <span style={{ fontFamily: theme.typography.fontFamily.heading, fontSize: '22px', letterSpacing: '-0.02em', color: theme.colors.text.primary }}>
+              Free Body
+            </span>
+          </Link>
+
+          <nav className="app-nav" aria-label="Main" style={{ display: 'flex', justifyContent: 'flex-start', gap: '36px' }}>
+            <NavLink to="/courses" className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}>
+              Courses
+            </NavLink>
+          </nav>
+          <input
+            type="search"
+            aria-label="Search topics and formulas"
+            placeholder="Search a topic or formula"
+            className="app-search"
             style={{
-              fontFamily: theme.typography.fontFamily.heading,
-              fontWeight: 700,
-              fontSize: '20px',
+              width: '100%',
+              maxWidth: '300px',
+              marginLeft: 'auto',
+              height: '44px',
+              padding: '0 20px',
+              border: 'none',
+              borderRadius: '22px',
+              backgroundColor: theme.colors.bg.secondary,
+              fontFamily: 'inherit',
+              fontSize: '14px',
               color: theme.colors.text.primary,
             }}
-          >
-            SimMec
-          </span>
-        </Link>
+          />
+        </header>
+        )}
 
-        <nav style={{ display: 'flex', gap: theme.spacing[6], fontSize: '14px', fontWeight: 500 }}>
-          <Link to="/courses" style={{ textDecoration: 'none', color: theme.colors.accent[600] }}>
-            Courses
-          </Link>
-        </nav>
+        <main className="app-main">
+          <Outlet />
+        </main>
 
-        <div style={{ flexGrow: 1 }} />
-
-        <input
-          type="search"
-          aria-label="Search topics and formulas"
-          placeholder="Search a topic or formula"
+        <footer
           style={{
-            width: '320px',
-            height: '40px',
-            padding: `0 ${theme.spacing[3]}`,
-            border: `1px solid ${theme.colors.gray[400]}`,
-            borderRadius: theme.radius.md,
-            backgroundColor: theme.colors.bg.secondary,
-            fontFamily: 'inherit',
+            minHeight: '72px',
+            padding: '16px 28px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: theme.spacing[3],
+            borderRadius: '24px',
+            background: theme.colors.gray[900],
+            color: '#FFFFFF',
             fontSize: '14px',
-            color: theme.colors.text.primary,
           }}
-        />
-      </header>
-      <Outlet />
+        >
+          <span style={{ fontFamily: theme.typography.fontFamily.heading, fontSize: '18px' }}>Free Body</span>
+          <span style={{ color: theme.colors.lightBlue[300] }}>Mechanical engineering, interactive.</span>
+        </footer>
+      </div>
     </div>
   )
 }

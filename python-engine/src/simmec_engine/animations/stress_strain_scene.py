@@ -30,13 +30,13 @@ from manim import (
     config,
 )
 
-PAPER = "#F3F0E8"
-INK = "#16191D"
-ACCENT = "#C2410C"
-BLUE = "#1E4E8C"
-SUCCESS = "#2F6F4E"
-WARNING = "#B8400C"
-ERROR = "#9A3412"
+PAPER = "#FAF3EC"
+INK = "#201A2B"
+ACCENT = "#F1491E"
+BLUE = "#0EA5D9"
+SUCCESS = "#2FAE7A"
+WARNING = "#F5B231"
+ERROR = "#E23F3F"
 
 config.background_color = PAPER
 

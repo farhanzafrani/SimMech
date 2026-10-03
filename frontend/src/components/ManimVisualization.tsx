@@ -17,10 +17,9 @@ export default function ManimVisualization({ src, title }: ManimVisualizationPro
   return (
     <div
       style={{
-        borderRadius: theme.radius.lg,
-        border: `1px solid ${theme.colors.border}`,
+        borderRadius: theme.radius.xl,
         overflow: 'hidden',
-        backgroundColor: theme.colors.gray[900],
+        backgroundColor: '#0A1230',
       }}
     >
       {showPlaceholder ? (
@@ -35,9 +34,16 @@ export default function ManimVisualization({ src, title }: ManimVisualizationPro
             color: theme.colors.gray[400],
           }}
         >
-          <div style={{ fontSize: '32px' }}>🎬</div>
-          <div style={{ fontWeight: 600 }}>Animation coming soon</div>
-          <div style={{ fontSize: '13px', color: theme.colors.gray[500] }}>{title}</div>
+          <span
+            aria-hidden
+            style={{ width: 64, height: 64, borderRadius: 32, background: theme.colors.accent.light, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          >
+            <svg width="22" height="22" viewBox="0 0 30 30">
+              <path d="M9 5 L25 15 L9 25 Z" fill="#111113" />
+            </svg>
+          </span>
+          <div style={{ fontWeight: 600, color: '#FFFFFF' }}>Animation coming soon</div>
+          <div style={{ fontSize: '13px', color: theme.colors.lightBlue[300] }}>{title}</div>
         </div>
       ) : (
         <video

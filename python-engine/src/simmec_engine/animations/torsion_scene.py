@@ -35,11 +35,11 @@ from manim import (
     interpolate_color,
 )
 
-PAPER = "#F3F0E8"
-INK = "#16191D"
-ACCENT = "#C2410C"
-BLUE = "#1E4E8C"
-BORDER = "#D6D1C4"
+PAPER = "#FAF3EC"
+INK = "#201A2B"
+ACCENT = "#F1491E"
+BLUE = "#0EA5D9"
+BORDER = "#E3D2BE"
 
 config.background_color = PAPER
 

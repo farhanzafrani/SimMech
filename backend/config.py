@@ -13,6 +13,7 @@ class Settings(BaseSettings):
 
     cors_origins: list[str] = [
         "http://localhost:5173",  # Vite dev server
+        "http://localhost:4173",  # Vite preview server (production build)
         "http://localhost:3000",  # Alternative React dev server
     ]
 

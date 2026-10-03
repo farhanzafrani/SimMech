@@ -1,77 +1,85 @@
 /**
- * SimMec Design System — "Free Body"
- * Warm paper background, editorial technical-drafting aesthetic.
+ * Free Body design system
+ * Cobalt blue + signal lime on a navy ink, set in big rounded "bento" surfaces.
+ * Type: DM Serif Display (headings), DM Sans (body), STIX Two Text (equations),
+ * JetBrains Mono (data).
  */
 
 export const theme = {
   // Primary Colors
   colors: {
-    // Blue accent (visualization / secondary actions) — was "lightBlue"
+    // Cobalt — primary accent (CTAs, identity, links)
     lightBlue: {
-      50: '#E9F0F8',
-      100: '#D3E1F1',
-      200: '#A7C3E3',
-      300: '#7BA5D5',
-      400: '#4676AE',
-      500: '#1E4E8C', // Primary accent blue
-      600: '#1A4478',
-      700: '#153864',
-      800: '#102A4A',
-      900: '#0A1D33',
+      50: '#EEF1FF',
+      100: '#DCE3FF',
+      200: '#C9D4FF',
+      300: '#A9BBFF',
+      400: '#7D97FF',
+      500: '#2B4FE3', // Primary accent
+      600: '#1F3BB3',
+      700: '#1A35B8',
+      800: '#16255A',
+      900: '#0E1A3D',
     },
 
-    // Warm paper / ink neutrals — was "gray"
+    // Neutrals — cool greys with a navy ink
     gray: {
-      50: '#FBFAF6', // Card surface
-      100: '#F3F0E8', // Page background
-      200: '#E4DFD2',
-      300: '#D6D1C4', // Border
-      400: '#C9C3B4', // Input border
-      500: '#9AA0A8',
-      600: '#6B7079',
-      700: '#4F5560',
-      800: '#2A2F36', // Body ink
-      900: '#16191D', // Primary ink
+      50: '#FFFFFF', // Card surface
+      100: '#F1F1F4', // Soft panel surface
+      200: '#E4E4EA', // Hairline border
+      300: '#C9C9D2',
+      400: '#9A9AA5',
+      500: '#7A7A85',
+      600: '#55555E',
+      700: '#2C3D7A',
+      800: '#22336E', // Body ink
+      900: '#0E1A3D', // Navy — dark panels
     },
 
     // Accent Colors
-    success: '#2F6F4E',
-    warning: '#B8400C',
-    error: '#9A3412',
-    info: '#1E4E8C',
+    success: '#2E9B54',
+    warning: '#E0A100',
+    error: '#E2483D',
+    info: '#2B4FE3',
 
-    // Orange accent (primary CTAs / highlights)
+    // Signal lime — highlights, active marks, "on" state
     accent: {
-      500: '#C2410C',
-      600: '#B8400C',
-      light: '#F3A57E',
+      500: '#2B4FE3',
+      600: '#1F3BB3',
+      light: '#C8F04B',
+    },
+
+    // Extra signal colors — category tags, step markers.
+    spectrum: {
+      cyan: '#2B4FE3',
+      coral: '#E2483D',
+      sun: '#E0A100',
+      leaf: '#8FD400',
+      violet: '#7B5CFA',
+      lime: '#C8F04B',
     },
 
     // Semantic
     text: {
-      primary: '#16191D',
-      secondary: '#3F454E',
-      light: '#6B7079',
+      primary: '#111113',
+      secondary: '#22336E',
+      light: '#55555E',
     },
     bg: {
-      primary: '#FBFAF6',
-      secondary: '#F3F0E8',
-      tertiary: '#E9F0F8',
+      primary: '#FFFFFF',
+      secondary: '#F1F1F4',
+      tertiary: '#EEF1FF',
     },
-    border: '#D6D1C4',
+    border: '#E4E4EA',
   },
 
   // Typography
   typography: {
     fontFamily: {
-      // Headings: distinctive geometric sans
-      heading: '"Space Grotesk", "Inter", "Segoe UI", sans-serif',
-      // Body: clean, highly readable
-      base: '"IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif',
-      // Code / labels: monospace
-      mono: '"IBM Plex Mono", "Fira Code", "SF Mono", Monaco, monospace',
-      // Formulas: italic serif
-      serif: '"STIX Two Text", "Times New Roman", serif',
+      heading: '"DM Serif Display", "Georgia", serif',
+      base: '"DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif',
+      mono: '"JetBrains Mono", "Fira Code", "SF Mono", Monaco, monospace',
+      serif: '"STIX Two Text", "Georgia", serif',
     },
     fontSize: {
       xs: '0.75rem',      // 12px
@@ -113,25 +121,25 @@ export const theme = {
     16: '4rem',     // 64px
   },
 
-  // Shadows — hard, offset (drafting-table feel), no blur
+  // Shadows — soft, low-contrast; surfaces are separated by tone more than blur
   shadows: {
-    xs: '0 1px 2px 0 rgba(22, 25, 29, 0.06)',
-    sm: '0 1px 3px 0 rgba(22, 25, 29, 0.08)',
-    base: '4px 4px 0 #16191D',
-    md: '6px 6px 0 #16191D',
-    lg: '10px 10px 0 #16191D',
-    xl: '14px 14px 0 #16191D',
+    xs: '0 1px 2px 0 rgba(14, 26, 61, 0.05)',
+    sm: '0 2px 6px 0 rgba(14, 26, 61, 0.07)',
+    base: '0 6px 16px 0 rgba(14, 26, 61, 0.08)',
+    md: '0 10px 28px 0 rgba(14, 26, 61, 0.10)',
+    lg: '0 20px 44px 0 rgba(14, 26, 61, 0.14)',
+    xl: '0 30px 60px 0 rgba(10, 26, 107, 0.30)',
   },
 
-  // Border Radius — small, drafted corners rather than soft/rounded
+  // Border Radius — large, friendly "bento" corners
   radius: {
     none: '0',
-    sm: '0.125rem',   // 2px
-    base: '0.25rem',  // 4px
-    md: '0.375rem',   // 6px
-    lg: '0.5rem',     // 8px
-    xl: '0.5rem',
-    '2xl': '0.5rem',
+    sm: '0.5rem',     // 8px
+    base: '0.625rem', // 10px
+    md: '0.875rem',   // 14px
+    lg: '1.25rem',    // 20px
+    xl: '1.75rem',    // 28px
+    '2xl': '2.25rem', // 36px
     full: '9999px',
   },
 
@@ -161,7 +169,7 @@ export const theme = {
 export const componentStyles = {
   // Visualization Areas
   visualization: {
-    background: theme.colors.bg.primary,
+    background: theme.colors.bg.secondary,
     border: `1px solid ${theme.colors.border}`,
     borderRadius: theme.radius.lg,
     padding: theme.spacing[6],
@@ -170,8 +178,8 @@ export const componentStyles = {
 
   // Info Boxes
   infoBox: {
-    background: theme.colors.bg.primary,
-    border: `1px solid ${theme.colors.border}`,
+    background: theme.colors.lightBlue[50],
+    border: `1px solid ${theme.colors.lightBlue[200]}`,
     borderRadius: theme.radius.md,
     padding: theme.spacing[4],
     color: theme.colors.text.primary,
@@ -186,6 +194,24 @@ export const componentStyles = {
     fontFamily: theme.typography.fontFamily.mono,
     fontSize: theme.typography.fontSize.sm,
     overflowX: 'auto' as const,
+  },
+};
+
+// Dark mode theme (optional)
+export const darkTheme = {
+  colors: {
+    ...theme.colors,
+    text: {
+      primary: '#f3f4f6',
+      secondary: '#d1d5db',
+      light: '#9ca3af',
+    },
+    bg: {
+      primary: '#111827',
+      secondary: '#1f2937',
+      tertiary: '#1a3a42',
+    },
+    border: '#374151',
   },
 };
 

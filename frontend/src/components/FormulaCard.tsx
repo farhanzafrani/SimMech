@@ -10,10 +10,11 @@ export default function FormulaCard({ label, formula, latex, note, emphasis }: F
         display: 'flex',
         flexDirection: 'column',
         gap: theme.spacing[3],
-        padding: theme.spacing[4],
+        padding: theme.spacing[5],
+        borderRadius: theme.radius.xl,
         ...(emphasis
           ? { backgroundColor: theme.colors.gray[900], color: theme.colors.bg.primary, border: 'none' }
-          : {}),
+          : { backgroundColor: theme.colors.bg.secondary, border: 'none' }),
       }}
     >
       <div style={{ fontSize: '13px', fontWeight: 600, color: emphasis ? theme.colors.accent.light : theme.colors.text.light }}>
@@ -26,7 +27,7 @@ export default function FormulaCard({ label, formula, latex, note, emphasis }: F
           <span style={{ fontFamily: theme.typography.fontFamily.serif, fontStyle: 'italic' }}>{formula}</span>
         )}
       </div>
-      <div style={{ fontSize: '13px', lineHeight: 1.5, color: emphasis ? theme.colors.gray[200] : theme.colors.text.light }}>
+      <div style={{ fontSize: '13px', lineHeight: 1.5, color: emphasis ? theme.colors.lightBlue[300] : theme.colors.text.light }}>
         {note}
       </div>
     </div>
