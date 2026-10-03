@@ -65,15 +65,15 @@ class BoltedJointsScene(Scene):
         # --- Part 2: bar chart — preload vs. resultant loads --------------------
         base_y = -2.6
         bars = [
-            ("F_i (preload)", 41.7, ACCENT),
-            ("F_b (bolt, loaded)", 46.7, ACCENT),
-            ("F_m (plates, loaded)", 26.7, BLUE),
+            ("F_i (preload)", 36.7, ACCENT),
+            ("F_b (bolt, loaded)", 41.7, ACCENT),
+            ("F_m (plates, loaded)", 21.7, BLUE),
         ]
         chart = VGroup()
         x0 = -3.6
         for i, (label, value, color) in enumerate(bars):
             x = x0 + i * 3.6
-            height = value / 55.6 * 2.2
+            height = value / 48.9 * 2.2
             bar = Rectangle(width=0.9, height=height, color=color, fill_color=color, fill_opacity=0.85)
             bar.move_to([x, base_y + height / 2, 0])
             val_label = Text(f"{value:.1f} kN", font_size=20, color=INK).next_to(bar, UP, buff=0.1)

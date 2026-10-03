@@ -1,6 +1,6 @@
 /**
  * useShaftDesignSimulation - Hook for combined bending-and-torsion shaft
- * sizing simulation (ASME DE-Goodman equation), with debouncing.
+ * sizing simulation (DE-Goodman equation), with debouncing.
  */
 
 import { useEffect, useState, useCallback, useRef } from 'react'

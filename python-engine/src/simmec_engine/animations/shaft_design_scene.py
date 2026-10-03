@@ -4,7 +4,7 @@ Manim scene for the "Shaft Design Under Combined Bending and Torsion" topic.
 No LaTeX distribution is available — uses Pango-backed `Text` only. Shows a
 stepped shaft with a fillet carrying both an alternating bending moment and a
 steady torque at the same stress-concentration point, then the resulting
-minimum-diameter sizing result from the worked example (28.2 mm → 30 mm stock).
+minimum-diameter sizing result from the worked example (30.2 mm → 32 mm stock).
 
 Render with:
     manim -qh --format=mp4 -o shaft-design shaft_design_scene.py ShaftDesignScene
@@ -82,9 +82,9 @@ class ShaftDesignScene(Scene):
         bar_axis = Line([-4, -0.5, 0], [4, -0.5, 0], color=INK, stroke_width=3)
         req_x, stock_x = 0.3, 1.1
         req_tick = Line([req_x, -0.75, 0], [req_x, -0.25, 0], color=ACCENT, stroke_width=4)
-        req_label = Text("needs ≥ 28.2 mm", font_size=22, color=ACCENT).next_to(req_tick, UP, buff=0.2)
+        req_label = Text("needs ≥ 30.2 mm", font_size=22, color=ACCENT).next_to(req_tick, UP, buff=0.2)
         stock_tick = Line([stock_x, -0.75, 0], [stock_x, -0.25, 0], color=LEAF, stroke_width=4)
-        stock_label = Text("use 30 mm stock", font_size=22, color=LEAF).next_to(stock_tick, DOWN, buff=0.2)
+        stock_label = Text("use 32 mm stock", font_size=22, color=LEAF).next_to(stock_tick, DOWN, buff=0.2)
         self.play(Create(bar_axis))
         self.play(Create(req_tick), Write(req_label))
         self.play(Create(stock_tick), Write(stock_label))

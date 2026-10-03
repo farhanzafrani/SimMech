@@ -3,7 +3,7 @@
  *
  * Students adjust the alternating bending moment, steady torque, the
  * shoulder-fillet stress concentration (K_t, q), material fatigue
- * properties, and a target factor of safety, to see the ASME DE-Goodman
+ * properties, and a target factor of safety, to see the DE-Goodman
  * required shaft diameter and the resulting local stress at the fillet
  * update live.
  */
@@ -268,7 +268,7 @@ export default function ShaftDesignAnalysis() {
             <div style={{ ...componentStyles.infoBox, padding: theme.spacing[3] }}>
               <p style={{ margin: `${theme.spacing[1]} 0`, fontFamily: theme.typography.fontFamily.mono, fontSize: '13px' }}>K_f = 1 + q(K_t − 1)</p>
               <p style={{ margin: `${theme.spacing[1]} 0`, fontFamily: theme.typography.fontFamily.mono, fontSize: '13px' }}>
-                d³ = (32n/π)·√[(K_f M_a/S_e)² + (3/4)(K_fs T_m/S_ut)²]
+                d³ = (16n/π)·[2 K_f M_a/S_e + √3 K_fs T_m/S_ut]
               </p>
               <p style={{ margin: `${theme.spacing[1]} 0`, fontFamily: theme.typography.fontFamily.mono, fontSize: '13px' }}>σ_a' = K_f · 32 M_a / (π d³)</p>
             </div>

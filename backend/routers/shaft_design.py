@@ -1,5 +1,7 @@
 """Shaft Design Under Combined Bending and Torsion API routes"""
 
+from typing import Optional
+
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
@@ -17,6 +19,8 @@ class ShaftDesignRequest(BaseModel):
     stress_concentration_factor: float
     notch_sensitivity: float
     target_safety_factor: float
+    # Optional separate fatigue factor for the torsional stress riser; defaults to K_f.
+    torsion_fatigue_factor: Optional[float] = None
 
 
 class ShaftDesignDistributionPoint(BaseModel):
@@ -46,7 +50,7 @@ async def compute_shaft_design_endpoint(request: ShaftDesignRequest):
     """
     Compute the minimum shaft diameter for a rotating shaft under combined
     alternating bending and steady torsion at a stress-concentration
-    feature (e.g. a shoulder fillet), using the ASME DE-Goodman equation.
+    feature (e.g. a shoulder fillet), using the DE-Goodman equation (distortion energy + modified Goodman line).
 
     Given the alternating bending moment, steady torque, material fatigue
     properties, geometric stress-concentration factor, notch sensitivity,
@@ -66,6 +70,7 @@ async def compute_shaft_design_endpoint(request: ShaftDesignRequest):
             stress_concentration_factor=request.stress_concentration_factor,
             notch_sensitivity=request.notch_sensitivity,
             target_safety_factor=request.target_safety_factor,
+            torsion_fatigue_factor=request.torsion_fatigue_factor,
         )
         return ShaftDesignResponse(**result)
 

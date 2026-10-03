@@ -291,7 +291,7 @@ export const CONTENT: Record<string, TeachingContent> = {
         latex: "d^3 = \\frac{16\\,n}{\\pi}\\left[\\frac{2K_f M_a}{S_e} + \\frac{\\sqrt{3}\\,K_{fs}T_m}{S_{ut}}\\right]",
       },
       {
-        text: 'The topic page uses the root-sum-square (quadrature) combination of the two terms, d³ = (32n/π)√[(K_f M_a/S_e)² + ¾(K_fs T_m/S_ut)²]. Adding two positive terms always gives a bigger number than combining them in quadrature, so the quadrature form returns a smaller (less conservative) diameter. For the page’s own example the linear sum gives about 30.2 mm against 28.2 mm — which is exactly why you round up to a stock size and why your design code, not memory, should decide which form you use.',
+        text: 'Two terms are added, not combined in quadrature: the linear sum is the conservative DE-Goodman form. Some texts combine the terms as a square root of the sum of squares (the DE-Elliptic form, which also puts the yield strength S_y in the torsion term). Combining the same two terms in quadrature gives a smaller number than adding them, so the two forms are not interchangeable — check which one your design code or course expects. For the worked example on this page the linear sum gives about 30.2 mm — a 30 mm bar is about 2 % short of n = 2, so you round up to the next standard size.',
       },
     ],
     commonMistakes: [
@@ -732,7 +732,7 @@ export const CONTENT: Record<string, TeachingContent> = {
         latex: '\\sigma = \\frac{W^t P_d}{F\\,Y}',
       },
       {
-        text: 'Real gears see additional dynamic loading as teeth come into contact. The velocity factor K_v multiplies the stress; with V the pitch-line velocity in ft/min, V = π d n/12, and the topic page uses K_v = (1200 + V)/1200. Modern design (AGMA/ISO) replaces this with further factors for overload, size, load distribution and geometry.',
+        text: 'Real gears see additional dynamic loading as teeth come into contact. The velocity factor K_v multiplies the stress; with V the pitch-line velocity in ft/min, V = π d n/12, and the topic page uses K_v = (1200 + V)/1200, the form for cut or milled teeth (hobbed or shaped teeth use (78 + √V)/78). Modern design (AGMA/ISO) replaces this with further factors for overload, size, load distribution and geometry.',
         latex: '\\sigma = K_v\\,\\frac{W^t P_d}{F\\,Y}',
       },
     ],
